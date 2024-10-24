@@ -1,6 +1,6 @@
-CHPC 2023 Student Cluster Competition
+CHPC 2024 Student Cluster Competition
 ========================================
-Benchmarking and Competition instructions for the Center for High Performance Computing (CHPC) 2023 Student Cluster Compettion (SCC). Which is hosted by the National Integrated Cyber Infrastructure Systems (NICIS), a division of the South African Council for Scientific and Industrial Research (CSIR). For 2023 the competition will be held in person at the Kruger Gate Hotel in Mpumalanga, South Africa.
+Benchmarking and Competition instructions for the Center for High Performance Computing (CHPC) 2024 Student Cluster Compettion (SCC). Which is hosted by the National Integrated Cyber Infrastructure Systems (NICIS), a division of the South African Council for Scientific and Industrial Research (CSIR). For 2024 the competition will be held in person at the Broadwalk International Convention Centre, Gqeberha, South Africa.
 
 # Getting Started
 
@@ -16,7 +16,7 @@ To receive the next set of benchmarks, you will need to make a valid submission 
 
 The competition organizers will give teams a general indication of where they should be, in the morning at the beginning of the day, and again in the afternoon at the end of the day.
 
-The competition will end on **Thursday, 7<sup>th</sup> of December at 10:00am**.
+The competition will end on **Wednesday, 4<sup>th</sup> of December at 12:00am midday**.
 
 Rulings and decisions from the competition organizers are final.
 
@@ -24,24 +24,24 @@ Good Luck!
 
 # Timetable
 
-<img width="800px" src="./CHPC23_SCC_Conference_Timetable.png" alt="CHPC23 SCC National Conference" />
+
 
 # Scoring
 
 | Application   | Weight | Breakdown                                                                                                                                  |
 | ---           |    --- | ---                                                                                                                                        |
 | HPCC & HPCG   |    20% | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul>                                    |
-| OpenFOAM      |    10% | <ul><li>Parallel Efficiency Investigation *[4%]*<ul><li>ParaView Visualization *[2%]*</li></ul><li>Simple Benchmark Large *[4%]*</li></ul> |
-| AmberMD       |    10% | <ul><li>Explicit Solvent: JAC_Production_NPT_4fs *[2%]* & Solvent: JAC_Production_NVE_4fs *[2%]*<li>Implicit Solvent: Myoglobin *[3%]*<li>Implicit Solvent: Nucleosome *[3%]*</li></ul> |
-| WRF           |    10% | <ul><li>Single Domain Case *[4%]*<ul><li> NCL Visualization *[2%]*</li></ul><li>Nested Two-Domain Case *[4%]*</li></ul>                    |
-| SwiftSIM      |    10% | <ul><li>Isolated Galaxy Potential *[4%]*<ul><li> PySPHViewer *[2%]*</li></ul><li>Eagle 25 *[4%]*</li></ul>                                 |
-| MILC          |    10% | NERSC MILC Medium *[10%]*                                                                                                                  |
-| Qiskit-Aer    |    10% | <ul><li>Quantum Volume Experiment *[4%]*<ul><li> Graphs: QV Simulation Time vs Number of Qubits *[2%]*</li></ul><li>Multinode MPI Run *[4%]*</li></ul>                                 |
+|   LAMMPS   |     |  |
+|   RegCM   |     |  |
+|   MILC   |     |  |
+|   NWChem   |     |  |
+|   CFD with MatLab |     |  |
+|   Monte Carlo with MatLab   |     |  |
 | Presentation  |    20% | <ul><li>Judges' Scores *[10%]*<li>Cluster Configurations *[5%]*<li>Fan Favorite *[5%]*</li></UL>                                           |
 
 # Instructions for Mentors
 
-The role of Mentors and Volunteers is to provide leadership and guidance for the student competitors participating in this year's Center for High Performance Computing 2023 Student Cluster Competition.
+The role of Mentors and Volunteers is to provide leadership and guidance for the student competitors participating in this year's Center for High Performance Computing 2024 Student Cluster Competition.
 
 In preparing your teams for the competition, your main goal is to ensure that you teach and impart knowledge to the student participants in such a way that they are empowered and enable to tackle the problems and benchmarking tasks themselves.
 
@@ -53,9 +53,7 @@ Any mentors found to be directly in contravention of this rule, may result in th
 
 ## Main Conference Participation
 
-In addition to supporting their teams, mentors are also **strongly** encouraged to participate in the Main Conference. Shuttles will be available between the Skukuza Safari Lodge *(Main Conference Venue)* and the Kruger Gate Hotel *(Student Cluster Competition Venue)*.
-
-There are a number of interesting talks, panels, workshops, tutorials and tracks [scheduled](https://events.chpc.ac.za/event/125/timetable/#all.detailed) for this year's conference. Coordinate and plan with your teams accordingly, so that you may make the best use of your time here by providing support, as well as enjoying and learning from the conference.
+In addition to supporting their teams, mentors are also **strongly** encouraged to participate in the Main Conference. There are a number of interesting talks, panels, workshops, tutorials and tracks [scheduled](https://events.chpc.ac.za/event/125/timetable/#all.detailed) for this year's conference. Coordinate and plan with your teams accordingly, so that you may make the best use of your time here by providing support, as well as enjoying and learning from the conference.
 
 # Cheat Sheet
 
