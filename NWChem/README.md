@@ -42,11 +42,13 @@ Choose your prefered release
 
 ### Use the hotfix/release-7-2-0 branch
 
-The `master` branch may not be well maintained. For that reason you should checkout to the `hotfix/release-7-2-0` branch:
+The `master` branch may not be well maintained. For that reason you should use the `hotfix/release-7-2-0` branch:
 ```bash
 $ cd nwchem
 $ git checkout hotfix/release-7-2-0
 ```
+
+Otherwise use the `master` branch
 
 Detailed instructions and explaination of building, compiling and installing NWChem can be found here ***https://nwchemgit.github.io/Compiling-NWChem.html.***
 
