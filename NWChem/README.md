@@ -40,7 +40,7 @@ NWChem is an open-source, high performance, computational chemistry suite of sof
 
 Choose your prefered release
 
-### use the hotfix/release-7-2-0 branch
+### Use the hotfix/release-7-2-0 branch
 
 The `master` branch may not be well maintained. For that reason you should checkout to the `hotfix/release-7-2-0` branch:
 ```bash
@@ -50,7 +50,7 @@ $ git checkout hotfix/release-7-2-0
 
 Detailed instructions and explaination of building, compiling and installing NWChem can be found here ***https://nwchemgit.github.io/Compiling-NWChem.html.***
 
-### load appropriate modules 
+### Load appropriate modules 
 
 ```bash
 module load path/to/gcc 
@@ -78,7 +78,7 @@ $ make -j<Num_Procs> >& make_logfile.log
 ```
 
 
-### sample build script for NWChem application on LENGAU:
+### Sample build script for NWChem application on LENGAU:
 
 ```bash
 
