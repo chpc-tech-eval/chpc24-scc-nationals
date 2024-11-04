@@ -17,7 +17,7 @@ NWChem is an open-source, high performance, computational chemistry suite of sof
 
 ### Obtaining the source code
 
- NWChem’s source and corresponding tools can be obtained from GitHub:
+ NWChem’s source and corresponding tools can be obtained from GitHub, please choose 7.2.2 release:
 
 - **7.2.2 Release**
 ```bash
@@ -42,8 +42,8 @@ $ ./install-armci-mpi
 ```
 
 ### To compile, use the following commands
-- Ensure to set the env. variable USE_MPI and provide a working MPI installation*
-- Redirect `make` output to a log file
+- Ensure to set the env. variable USE_MPI and provide a working MPI installation.
+- Redirect `make` output to a log file.
 
 ```bash
 $ cd cnwchem/src
