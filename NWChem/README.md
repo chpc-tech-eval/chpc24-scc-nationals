@@ -68,8 +68,8 @@ $ ./install-armci-mpi
 ```
 
 ### To compile, use the ff commands
-1. ***Ensure to set the env. variable USE_MPI and provide a working MPI installation***
-2. ***Redirect `make` output to a log file***
+1. **Ensure to set the env. variable USE_MPI and provide a working MPI installation**
+2. **Redirect `make` output to a log file**
 
 ```bash
 $ cd cnwchem/src
