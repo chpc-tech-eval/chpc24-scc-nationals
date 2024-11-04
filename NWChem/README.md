@@ -19,20 +19,20 @@ NWChem is an open-source, high performance, computational chemistry suite of sof
 
  NWChem’s source and corresponding tools can be obtained from GitHub:
 
- --**master** 
+ - **master** 
 ```bash
     $ git clone https://github.com/nwchemgit/nwchem.git
     $ cd nwchem/src/tools && ./get-tools-github
 ```
 
--- **7.2.3 Release** 
+- **7.2.3 Release** 
 
 ```bash
     $ git clone  -b hotfix/release-7-2-0 https://github.com/nwchemgit/nwchem.git nwchem-7.2.3
     $ cd nwchem-7.2.3/src/tools && ./get-tools-github
 ```
 
--- **7.2.2 Release**
+- **7.2.2 Release**
 ```bash
     $ git clone  -b hotfix/release-7-2-0 https://github.com/nwchemgit/nwchem.git nwchem-7.2.2
     cd nwchem-7.2.2/src/tools && ./get-tools-github
@@ -42,13 +42,13 @@ Choose your prefered release
 
 ### use the hotfix/release-7-2-0 branch
 
-The *default* `master` branch of the repository is not well maintained. For that reason you should checkout to the `hotfix/release-7-2-0` branch:
+The `master` branch may not be well maintained. For that reason you should checkout to the `hotfix/release-7-2-0` branch:
 ```bash
 $ cd nwchem
 $ git checkout hotfix/release-7-2-0
 ```
 
-***Detailed instructions and explaination of building, compiling and installing NWChem can be found here **https://nwchemgit.github.io/Compiling-NWChem.html.** ***
+Detailed instructions and explaination of building, compiling and installing NWChem can be found here ***https://nwchemgit.github.io/Compiling-NWChem.html.***
 
 ### load appropriate modules 
 
