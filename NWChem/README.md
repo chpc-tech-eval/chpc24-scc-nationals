@@ -33,7 +33,7 @@ module load path/to/gcc
 
 ### The following environment variables need to be set atleast
 ```bash
-$ cd nwchem(-7.2.2)
+$ cd nwchem-7.2.2
 $ export NWCHEM_TOP=/path/to/git/clone/nwchem
 $ export NWCHEM_TARGET=LINUX64
 $ export ARMCI_NETWORK=MPI-PR
