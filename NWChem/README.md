@@ -18,8 +18,6 @@ NWChem is an open-source, high performance, computational chemistry suite of sof
 ### Obtaining the source code
 
  NWChem’s source and corresponding tools can be obtained from GitHub, please choose 7.2.2 release:
-
-- **7.2.2 Release**
 ```bash
     $ git clone  -b hotfix/release-7-2-0 https://github.com/nwchemgit/nwchem.git nwchem-7.2.2
     cd nwchem-7.2.2/src/tools && ./get-tools-github
