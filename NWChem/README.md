@@ -19,8 +19,8 @@ NWChem is an open-source, high performance, computational chemistry suite of sof
 
  NWChem’s source and corresponding tools can be obtained from GitHub, please choose 7.2.2 release:
 ```bash
-    $ git clone  -b hotfix/release-7-2-0 https://github.com/nwchemgit/nwchem.git nwchem-7.2.2
-    $ cd nwchem-7.2.2/src/tools && ./get-tools-github
+git clone  -b hotfix/release-7-2-0 https://github.com/nwchemgit/nwchem.git nwchem-7.2.2
+cd nwchem-7.2.2/src/tools && ./get-tools-github
 ```
 
 ### Load appropriate modules 
@@ -31,12 +31,12 @@ module load path/to/gcc
 
 ### The following environment variables need to be set atleast
 ```bash
-$ cd nwchem-7.2.2
-$ export NWCHEM_TOP=/path/to/git/clone/nwchem
-$ export NWCHEM_TARGET=LINUX64
-$ export ARMCI_NETWORK=MPI-PR
-$ cd cnwchem/src/tools
-$ ./install-armci-mpi
+cd nwchem-7.2.2
+export NWCHEM_TOP=/path/to/git/clone/nwchem
+export NWCHEM_TARGET=LINUX64
+export ARMCI_NETWORK=MPI-PR
+cd cnwchem/src/tools
+./install-armci-mpi
 ```
 
 ### To compile, use the following commands
@@ -44,9 +44,9 @@ $ ./install-armci-mpi
 - Redirect `make` output to a log file.
 
 ```bash
-$ cd cnwchem/src
-$ make nwchem_config
-$ make -j<Num_Procs> >& make_logfile.log
+cd cnwchem/src
+make nwchem_config
+make -j<Num_Procs> >& make_logfile.log
 ```
 
 Detailed instructions and explainations of building, compiling and installing NWChem can be found here ***https://nwchemgit.github.io/Compiling-NWChem.html.***
