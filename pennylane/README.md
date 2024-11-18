@@ -1,4 +1,4 @@
-Pennylane
+PennyLane
 ==========
 
 [PennyLane](https://pennylane.ai/) is a cross-platform Python library for [quantum computing](https://pennylane.ai/qml/quantum-computing/), [quantum machine learning](https://pennylane.ai/qml/quantum-machine-learning/), and [quantum chemistry](https://pennylane.ai/qml/quantum-chemistry/). Train a quantum computer the same way as a neural network.
