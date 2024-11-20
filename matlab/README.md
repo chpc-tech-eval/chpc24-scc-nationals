@@ -120,17 +120,21 @@ Team Captains have been provided with the URL, Activation Key and Licensing info
    ```bash
    matlab
    ```
+   <p align="center"><img alt="Matlab 2024B Linux Installation" src="./resources/matlab_montecarlo_new_script.png" width=900 /></p>
 
-You have successfully installed MATLAB
+You have successfully installed MATLAB!
+
 # Benchmark: Monte Carlo Sampling Simulation (Calculating PI)
 
 Your task is to optimize and parallelize MATLAB code for improved execution speed of a Monte Carlo simulation used to estimate the value of Pi in MATLAB. For approximating the value of Pi consider this stochastic method that populates an array with random values and tests for unit circle inclusion, i.e. we generate a random number along the coordinate $x \in [0, R]$ and another random number along the coordinate $y \in [0, R]$. The ratio of the area of the circle of radius $R$, relative to that of the square of side with length $2R$, can be written as follows:
 
-$\frac{\textnormal{area of circle}}{\text{area of square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}
+$\frac{\textnormal{area of circle}}{\text{area of square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}$
 
 ## Visualize Problem Statement
 
 In order to better understand the task at hand, save the following MATLAB script at `monteCarloPiVis.m`. This script will randomly generate a pair of $(x, y)$ points on a rectangular grid and test whether the $radius r^2 = x^2 + y^2$ of those randomly generated points lies within a circle. The value of $\pi$ is approximately proportional to the ratio of points within the circle versus those that lie outside of it. The accuracy of this approximation can be improved by increasing the number of random samples.
+
+<p align="center"><img alt="Matlab 2024B Linux Installation" src="./resources/matlab_montecarlo_plot.png" width=300 /></p>
 
 For now carefully copy and paste the code as it is for now for the purposes of plotting and demonstrating the example. Read through the comments to help you further understand exactly what it is that you are coding. Further descriptions will be given in the next section.
 
@@ -155,26 +159,30 @@ figure(gcf);
 % Monte Carlo "for loop", iterating over N samples
 % Simplified version without plotting utilities described in the next section.
 for i = 1:N
-    if mod(i, 5E3) == 0
-        colormap([1 1 1; 1 0 0; 0 1 0; 0 0 1]);
-        image(points);
-        title(sprintf( 'pi=%f', 4*(count/i)));
-        pause(0.02)
+    if mod( i, 5e3 ) == 0
+        colormap( [1 1 1; 1 0 0; 0 1 0; 0 0 1] );
+        image( points );
+        title( sprintf( 'pi=%f', 4*(count/i)) );
+        pause( 0.02 )
     end
     x = rand();
     y = rand();
-    if x*x + y*y <= 1.0
-        points(round(x*(D-1))+1, round(y*(D-1)+1)) = 2;
+    r = sqrt(x^2 + y^2);
+    if r <= 1.0
+        points( round(x*(D-1))+1, round(y*(D-1)+1)) = 2;
         count = count + 1;
     else
-        points(round(x*(D-1))+1, round(y*(D-1)+1)) = 4;
+        points( round(x*(D-1))+1, round(y*(D-1)+1)) = 4;
     end
 end
 ```
 
+In order for your to reproduce the graph above, from the MATLAB GUI click on the "New Script" button copy, paste (using `Ctrl+Y`) and save the above into the "untitled" window. Then run your `monteCarloPiVis(1e6)` script with `N=1 000 000`.
+<p align="center"><img alt="Matlab 2024B Linux Installation" src="./resources/matlab_montecarlo_run_vis.png" width=900 /></p>
+
 ## Single Core (Serial) Experiment
 
-Save the following MATLAB script as `monteCarloPi.m` and use it to run the experiment on a Single Core. Verify the number of cores used to run the task using a terminal multiplexer together with your choice of either `htop` or `btop`.
+Save the following MATLAB script as `monteCarloPi.m` and use it to run the experiment on a Single Core. Verify the number of core(s) used to run the task using a terminal multiplexer together with your choice of either `htop` or `btop`.
 
 ```matlab
 function monteCarloPi(N)
@@ -200,10 +208,9 @@ end
 
 ```
 
-This time you will be running the benchmark without the GUI in a non-interactive mode using
+This time you will be running the benchmark without the GUI in a non-interactive mode using:
 ```bash
-matlab -nodisplay -nosplash -nodesktop -r "run('loopyMontePi(10e8).m');exit;"
-
+matlab -nodisplay -nosplash -nodesktop -nojvm -r "monteCarloPi(1e6)"
 ```
 
 ## Improve Performance Using MATLAB `Parfor`
