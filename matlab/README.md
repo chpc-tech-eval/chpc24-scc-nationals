@@ -128,13 +128,15 @@ You have successfully installed MATLAB!
 
 Your task is to optimize and parallelize MATLAB code for improved execution speed of a Monte Carlo simulation used to estimate the value of Pi in MATLAB. For approximating the value of Pi consider this stochastic method that populates an array with random values and tests for unit circle inclusion, i.e. we generate a random number along the coordinate $x \in [0, R]$ and another random number along the coordinate $y \in [0, R]$. The ratio of the area of the circle of radius $R$, relative to that of the square of side with length $2R$, can be written as follows:
 
+<p align="center">
 $\frac{\textnormal{area of circle}}{\text{area of square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}$
+</p>
 
 ## Visualize Problem Statement
 
-In order to better understand the task at hand, save the following MATLAB script at `monteCarloPiVis.m`. This script will randomly generate a pair of $(x, y)$ points on a rectangular grid and test whether the $radius r^2 = x^2 + y^2$ of those randomly generated points lies within a circle. The value of $\pi$ is approximately proportional to the ratio of points within the circle versus those that lie outside of it. The accuracy of this approximation can be improved by increasing the number of random samples.
+In order to better understand the task at hand, save the following MATLAB script to `monteCarloPiVis.m`. This script will randomly generate a pair of $(x, y)$ points on a rectangular grid and test whether the radius $r^2 = x^2 + y^2$ of those randomly generated points lies within the circumference of a circle. The value of $\pi$ is approximately proportional to the ratio of points within the circle versus those that lie outside of it. The accuracy of this approximation can be improved by increasing the number of random samples.
 
-<p align="center"><img alt="Matlab 2024B Linux Installation" src="./resources/matlab_montecarlo_plot.png" width=300 /></p>
+<p align="center"><img alt="Matlab 2024B Linux Installation" src="./resources/matlab_montecarlo_plot.png" width=500 /></p>
 
 For now carefully copy and paste the code as it is for now for the purposes of plotting and demonstrating the example. Read through the comments to help you further understand exactly what it is that you are coding. Further descriptions will be given in the next section.
 
@@ -182,11 +184,13 @@ In order for your to reproduce the graph above, from the MATLAB GUI click on the
 
 ## Single Core (Serial) Experiment
 
-Save the following MATLAB script as `monteCarloPi.m` and use it to run the experiment on a Single Core. Verify the number of core(s) used to run the task using a terminal multiplexer together with your choice of either `htop` or `btop`.
+Save the following MATLAB script as `monteCarloPi.m` and use it to run the experiment on a Single Core. Verify the number of core(s) used to run the task using a terminal multiplexer together with your choice of either `htop` or `btop`, following the instructions from the [Selection Round: On Terminal Multiplexers and Basic System Monitoring](https://github.com/chpc-tech-eval/scc/tree/main/tutorial2#terminal-multiplexers-and-basic-system-monitoring) content.
 
 ```matlab
 function monteCarloPi(N)
 % N is number of samples
+% tic is used to start a timer
+% toc is use to measure time taken to run benchmark
 
 tic
 count = 0;
@@ -194,7 +198,7 @@ for i=1:N
     x = rand();
     y = rand();
     r = sqrt(x^2 + y^2);
-    if r<1
+    if r < 1
         count = count + 1;
     end
 end
@@ -203,16 +207,51 @@ timeTaken = toc;
 
 fprintf("Estimate for pi is %.8f after %f seconds\n", estimatePi, timeTaken)
 fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
-fprintf("%.2f million samples per second\n", N/timeTaken/1e6 )
 end
 
 ```
 
 This time you will be running the benchmark without the GUI in a non-interactive mode using:
 ```bash
+matlab -batch "monteCarloPi(1e6)"
+
+# If you are running a version of MATLAB older than R2019b
 matlab -nodisplay -nosplash -nodesktop -nojvm -r "monteCarloPi(1e6)"
 ```
 
-## Improve Performance Using MATLAB `Parfor`
+## Performance Improvements
+
+You will now be parallelizing, improving and enhancing your simulation using the following steps.
+
+1. Replace the `for` loop statement with the parallel `parfor` loop statement:
+   * Further information can be found for `parfor` from the [MATLAB Documentation](https://www.mathworks.com/help/parallel-computing/parfor.html),
+   * 
+
+```Matlab
+function monteCarloPi(N)
+
+tic
+ticBytes(gcp)
+% Maximum number of workers (threads) running in parallel
+% Use M=0 for serial and single core run
+M = 15
+count = 0;
+parfor( i=1:N, M )
+    x = rand();
+    y = rand();
+    r = sqrt(x^2 + y^2);
+    if r < 1
+        count = count + 1;
+    end
+end
+estimatePi = 4*count/N;
+timeTaken = toc;
+dataTransfered = tocBytes(gcp);
+
+fprintf("Estimate for pi is %.8f after %f seconds\n" with %f Bytes transfered between worker nodes, estimatePi, timeTaken, dataTransfered)
+fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
+end
+
+```
 
 ## Run the Benchmark Over your Entire Cluster Using MPI
