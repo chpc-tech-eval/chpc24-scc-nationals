@@ -263,13 +263,12 @@ end
 
 ```
 
-### Experiment with a Vectorized implementation
+### Experiment with a vectorized implementation
 
 This solution will eliminate the for-loop altogether and make use of MATLAB optimized matrix operations. Where the relevant parts of the algorithm can be broken down as follows:
 
 * Instead of individually instantiating the `rand()` function and assigning the scalars `x` and `y`, generate an array of dimension `N x 2`.
 ```math
-\[
   xy_{N\times 2} =
   \left[ {\begin{array}{cc}
     x_{1} & y_{1}\\
@@ -277,23 +276,21 @@ This solution will eliminate the for-loop altogether and make use of MATLAB opti
     \vdots & \vdots\\
     x_{N} & y_{N}\\
   \end{array} } \right]
-\]
+
 ```
 * Moreover the element-wise square operation of the array `xy.^2` is the first part to be evaluated and is equivalent to:
-$$
-\[
-  xy.^2 =
+```math
+xy.^2 =
   \left[ {\begin{array}{cc}
     x_{1}^2 & y_{1}^2\\
     x_{2}^2 & y_{2}^2\\
     \vdots & \vdots\\
     x_{N}^2 & y_{N}^2\\
   \end{array} } \right]
-\]
-$$
+```
 
 * Next there is a pair-wise inner summation which is tested to lie within a unit circle:
-$$
+$$$
 \[
 sum(xy.^2, 2) <= 1 =
   \left[ {\begin{array}{cc}
@@ -303,7 +300,7 @@ sum(xy.^2, 2) <= 1 =
     (x_{N}^2 + y_{N}^2) & \le 1\\
   \end{array} } \right]
 \]
-$$
+$$$
 
 * Lastly, the outer summation counts the number of occurrences for which the above conditional test is true.
 
