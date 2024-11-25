@@ -124,6 +124,9 @@ Team Captains have been provided with the URL, Activation Key and Licensing info
 
 You have successfully installed MATLAB!
 
+> [!WARNING]
+> You are **STRONGLY** advised to install your MATLAB installations to a local, non-shared location. This will ensure that the License is correctly installed and configured for each the nodes in your cluster.
+
 # Benchmark: Monte Carlo Sampling Simulation (Calculating PI)
 
 Your task is to optimize and parallelize MATLAB code for improved execution speed of a Monte Carlo simulation used to estimate the value of Pi in MATLAB. For approximating the value of Pi consider this stochastic method that populates an array with random values and tests for unit circle inclusion, i.e. we generate a random number along the coordinate $x \in [0, R]$ and another random number along the coordinate $y \in [0, R]$. The ratio of the area of the circle of radius $R$, relative to that of the square of side with length $2R$, can be written as follows:
@@ -213,28 +216,34 @@ end
 
 This time you will be running the benchmark without the GUI in a non-interactive mode using:
 ```bash
-matlab -batch "monteCarloPi(1e6)"
+matlab -batch "monteCarloPi(1e8)"
 
-# If you are running a version of MATLAB older than R2019b
-matlab -nodisplay -nosplash -nodesktop -nojvm -r "monteCarloPi(1e6)"
+# If you are running a version of MATLAB older than R2019b or experience difficulties executing the above,
+# use the following to run the MATLAB script and immediately exit the intepreter
+matlab -nodisplay -nosplash -nodesktop -nojvm -r "run(monteCarloPi(1e6).m');exit;"
 ```
+
+> [!TIP]
+> Use a sensible number like $10^8$ for initial experimentation and testing.
 
 ## Performance Improvements
 
 You will now be parallelizing, improving and enhancing your simulation using the following steps.
 
-1. Replace the `for` loop statement with the parallel `parfor` loop statement:
-   * Further information can be found for `parfor` from the [MATLAB Documentation](https://www.mathworks.com/help/parallel-computing/parfor.html),
-   * 
+### Replace the `for` loop statement with the parallel `parfor` loop statement:
+
+Further information can be found for `parfor` from the [MATLAB Par-For Documentation](https://www.mathworks.com/help/parallel-computing/parfor.html). Additional documentation can be found [Algorithm Acceleration Using Parallel for-Loops (parfor)](https://www.mathworks.com/help/coder/ug/acceleration-of-matlab-algorithms-using-parallel-for-loops-parfor.html) and [Generate Parallel for-Loops Using the Open Multiprocessing (OpenMP) Application Interface](https://www.mathworks.com/help/ecoder/ug/Speed-Up-for-loop-implementation-in-the-Code-Generated-using-parfor.html).
+
+Essentially the variable `M` represents the number of OpenMP threads to parallelize the experiment over. Typically this will *match* the number of cores you have per node.
 
 ```Matlab
-function monteCarloPi(N)
+function monteCarloPi_parfor( N, M )
 
 tic
 ticBytes(gcp)
 % Maximum number of workers (threads) running in parallel
-% Use M=0 for serial and single core run
-M = 15
+% Use M=0 for serial, single core run
+M = <NUM_CORES>
 count = 0;
 parfor( i=1:N, M )
     x = rand();
@@ -250,6 +259,69 @@ dataTransfered = tocBytes(gcp);
 
 fprintf("Estimate for pi is %.8f after %f seconds\n" with %f Bytes transfered between worker nodes, estimatePi, timeTaken, dataTransfered)
 fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
+end
+
+```
+
+### Experiment with a Vectorized implementation
+
+This solution will eliminate the for-loop altogether and make use of MATLAB optimized matrix operations. Where the relevant parts of the algorithm can be broken down as follows:
+
+* Instead of individually instantiating the `rand()` function and assigning the scalars `x` and `y`, generate an array of dimension `N x 2`.
+```math
+\[
+  xy_{N\times 2} =
+  \left[ {\begin{array}{cc}
+    x_{1} & y_{1}\\
+    x_{2} & y_{2}\\
+    \vdots & \vdots\\
+    x_{N} & y_{N}\\
+  \end{array} } \right]
+\]
+```
+* Moreover the element-wise square operation of the array `xy.^2` is the first part to be evaluated and is equivalent to:
+$$
+\[
+  xy.^2 =
+  \left[ {\begin{array}{cc}
+    x_{1}^2 & y_{1}^2\\
+    x_{2}^2 & y_{2}^2\\
+    \vdots & \vdots\\
+    x_{N}^2 & y_{N}^2\\
+  \end{array} } \right]
+\]
+$$
+
+* Next there is a pair-wise inner summation which is tested to lie within a unit circle:
+$$
+\[
+sum(xy.^2, 2) <= 1 =
+  \left[ {\begin{array}{cc}
+    (x_{1}^2 + y_{1}^2) & \le 1\\
+    (x_{2}^2 + y_{2}^2) & \le 1\\
+    \vdots & \vdots\\
+    (x_{N}^2 + y_{N}^2) & \le 1\\
+  \end{array} } \right]
+\]
+$$
+
+* Lastly, the outer summation counts the number of occurrences for which the above conditional test is true.
+
+```MATLAB
+function monteCarloPi_vectorized( N )
+tic;
+count = 0;
+
+%
+xy = rand(N,2);
+count = sum( sum( xy.^2, 2 ) <= 1 );
+piEst = 4*count/N;
+timeTaken = toc;
+
+%fprintf("Estimate for pi is %.8f after %f seconds using %f Bytes\n",piEst, timeTaken)
+fprintf("Absolute error is %8.3e\n",abs(piEst2-pi))
+fprintf("%.2f million samples per second\n", N/timeTaken/1e6)
+
 end
 
 ```
