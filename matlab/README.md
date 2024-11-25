@@ -290,8 +290,7 @@ xy.^2 =
 ```
 
 * Next there is a pair-wise inner summation which is tested to lie within a unit circle:
-$$$
-\[
+```math
 sum(xy.^2, 2) <= 1 =
   \left[ {\begin{array}{cc}
     (x_{1}^2 + y_{1}^2) & \le 1\\
@@ -299,8 +298,7 @@ sum(xy.^2, 2) <= 1 =
     \vdots & \vdots\\
     (x_{N}^2 + y_{N}^2) & \le 1\\
   \end{array} } \right]
-\]
-$$$
+```
 
 * Lastly, the outer summation counts the number of occurrences for which the above conditional test is true.
 
