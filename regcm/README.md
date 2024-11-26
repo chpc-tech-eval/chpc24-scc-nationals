@@ -27,7 +27,7 @@ The model code is written in Fortran, utilizing features up to the 2008 standard
 The procedure to obtain the code is straightforward using Git:
 
 ```bash
-https://github.com/ICTP/RegCM/projects?query=is%3Aopen
+https://github.com/ICTP/RegCM
 ```
 
 ## Untar the tarball
@@ -43,16 +43,16 @@ Once the model is on disk, you should create the configure script with the follo
 The generated configure script allows for various options to conditionally activate specific parts of the code, enable different I/O options, or optimize for HPC platforms.
 
 ## Setting the NetCDF Path
-To avoid using an incorrect version of NetCDF, set the path to your NetCDF installation:
+Set the path to your NetCDF installation:
 ```
 export PATH=<path to netcdf>/bin:$PATH
 ```
 ## Configuring the Build System
 To configure the build system using the GNU Make program, you can simply type:
 ```
-./configure --with-netcdf 
+./configure --with-netcdf --enable-clm 
 ```
-This should suffice on most systems.
+This should suffice on most systems. 
 
 ## Build the Model Executables
 To compile the model executables and copy them to the bin directory, ensure that the GNU Make program is in your path. You can then execute the following commands:
@@ -60,7 +60,11 @@ To compile the model executables and copy them to the bin directory, ensure that
 make -j 4  #Adjust number of cores as needed
 make install
 ```
-These commands will compile the model and install the necessary binaries as specified. If all goes well then congratulations! You can now go to next step and run a simulation. 
+These commands will compile the model and install the necessary binaries as specified. If all goes well then congratulations! You can now go to next step and run a simulation. To clean up a failed RegCM compilation and remove any partially compiled files, you can use the following steps:
+```
+make clean
+make distclean
+```
 
 Here's the sample build script for LENGAU:
 ```
@@ -104,12 +108,12 @@ export HDF5=$NETCDF
 # System Limits
 ulimit -s unlimited
 ```
-## Access global datasets
+## Access Global Datasets
 
 The first step to run a test simulation is to obtain static data to localize model DOMAIN and Atmosphere and Ocean global model dataset to build initial and boundary conditions ICBC to run a local area simulation. ICTP maintains a public accessible web repository of datasets on: http://users.ictp.it/pubregcm/RegCM4/globedat.htm
 As of now you are requested to download required global data on your local disk storage before any run attempt. In the future, the ICTP ESP team has planned to make available an OpenDAP THREDDS Server to give remote access to global dataset for creating DOMAIN and ICBC without the need to download the global dataset, but just the required subset in space and time, using the ICTP web server capabilities to create that subset. 
 
-1. **Global dataset directory layout**  
+1. **Global Dataset Directory Layout**  
 ```
 export ICTP_DATASITE=http://clima-dods.ictp.it/regcm4
 ```
@@ -132,6 +136,7 @@ cd SURFACE
 curl -o GTOPO_DEM_30s.nc ${ICTP_DATASITE}/SURFACE/GTOPO_DEM_30s.nc
 curl -o GLCC_BATS_30s.nc ${ICTP_DATASITE}/SURFACE/GLCC_BATS_30s.nc
 curl -o GLZB_SOIL_30s.nc ${ICTP_DATASITE}/SURFACE/GLZB_SOIL_30s.nc
+curl -o GMTED_DEM_30s.nc ${ICTP_DATASITE}/SURFACE/GMTED_DEM_30s.nc
 ```
 3. **Sea Surface Temperature**
 
@@ -147,6 +152,7 @@ curl -o sst.wkmean.1990-present.nc \
 > ftp://$CDCSITE/sst.wkmean.1990-present.nc
 ```
 4. **Atmosphere and Land temperature Global Dataset**
+
 The model needs to build initial and boundary conditions for the regional scale, interpolating on the RegCM grid the data from a Global Climatic Model output. The GCM dataset can come from any of the supported models, but we will for now for our test run download just the EIN15 dataset for the year 1990 (Jan 01 00:00:00 UTC to Dec 31 18:00:00 UTC)
 ```
 cd $REGCM_GLOBEDAT
@@ -161,4 +167,135 @@ done
 ```
 With these datasets, we are now ready to go through the RegCM Little Tutorial in the next chapter of this User Guide.
 
+5. **Running a test simulation using the model**
 
+The model executables prepared in chapter 3 are waiting for us to use them. So let’s give them a chance. The model test run proposed here requires around 100Mb of disk space to store the DOMAIN and ICBC in
+input and the output files. We will assume here that you, the user, have already established a convenient directory on a disk partition with enough space identified in the following discussion with $REGCM_RUN We will setup in this directory a standard environment where the model can be executed for the purpose of learning how to use it.
+
+```
+cd $REGCM_RUN
+mkdir input output
+ln -sf $REGCM_ROOT/bin .
+cp $REGCM_ROOT/Testing/test_001.in .
+cd $REGCM_RUN
+```
+Now we are ready to modify the input namelist file to reflect this directory layout. A namelist file in FORTRAN is a convenient way to give input to a program in a formatted file, read at runtime by the program to setup its execution behaviour. So the next step is somewhat tricky, as you need to edit the namelist file respecting its well defined syntax. Open your preferred text file editor and load the test_001.in file. You will need to modify for the scope of the present tutorial the following lines:
+
+
+FROM:
+```dirter = ’/set/this/to/where/your/domain/file/is’,```
+
+TO:
+```dirter = ’input/’,```
+
+FROM:
+```inpter = ’/set/this/to/where/your/surface/dataset/is’,```
+
+TO:
+```inpter = ’$REGCM_GLOBEDAT’,```
+where $REGCM_GLOBEDAT is the directory where input data have been downloaded in chapter 4.
+
+FROM:
+```dirglob = ’/set/this/to/where/your/icbc/for/model/is’,```
+
+TO:
+```dirglob = ’input/’,```
+
+This is what my part of my namelist looks like: 
+```
+! small European domain
+ &dimparam
+ iy     = 34,
+ jx     = 64,
+ kz     = 18,
+ nsg    = 1,
+ /
+ &geoparam
+ iproj = 'LAMCON',
+ ds = 60.0,
+ ptop = 5.0,
+ clat = 45.39,
+ clon = 13.48,
+ plat = 45.39,
+ plon = 13.48,
+ truelatl = 30.0,
+ truelath = 60.0,
+ i_band = 0,
+ /
+ &terrainparam
+ domname = 'test_001',
+ lakedpth = .false.,
+ fudge_lnd   = .false.,
+ fudge_lnd_s = .false.,
+ fudge_tex   = .false.,
+ fudge_tex_s = .false.,
+ dirter = '/mnt/lustre/users/msovara/SoftwareBuilds/RegCM5/RegCM-5.0.0/sim_dir/REGCM_RUN/',
+ inpter = '/mnt/lustre/users/msovara/SoftwareBuilds/RegCM5/RegCM-5.0.0/sim_dir/REGCM_GLOBEDAT/',
+ /
+ &debugparam
+ debug_level = 0,
+ /
+ &boundaryparam
+ nspgx  = 12,
+ nspgd  = 12,
+ /
+ &globdatparam
+ ibdyfrq = 6,
+ ssttyp = 'OI_WK',
+ dattyp = 'EIN15',
+ gdate1 = 1990060100,
+ gdate2 = 1990070100,
+ dirglob = '/mnt/lustre/users/msovara/SoftwareBuilds/RegCM5/RegCM-5.0.0/sim_dir/REGCM_RUN/input/',
+ inpglob = '/mnt/lustre/users/msovara/SoftwareBuilds/RegCM5/RegCM-5.0.0/sim_dir/REGCM_GLOBEDAT',
+ /
+ &restartparam
+```
+6. **Create he SST using the sst program**
+
+We are now ready to create the Sea Surface Temperature for the model, reading a global dataset. The program which does this for you is the sst program, which is executed with the following commands:
+```
+cd $REGCM_RUN
+./bin/sst test_001.in
+```
+
+The SST file contains the Sea Surface temperature to be used in generating the Initial and Boundary Conditions for the model for the period specified in the namelist file. Again you may want to use the GrADSNcPlot or NCVIEW program to look at file content: If everything is correctly configured up to this point, the model should print something on stdout, and the last line will be:
+
+```Successfully generated SST```
+
+The input directory now contains the files ```test_001_DOMAIN000.nc``` and ```test_001_LANDUSE test_001_SST.nc```
+
+7. **Create the ICBC files using the icbc program**
+   
+Next step is to create the ICBC (Initial Condition, Boundary Conditions) for the model itself. The program which does this for you is the icbc program, executed with the following commands:
+```
+cd $REGCM_RUN
+./bin/icbc test_001.in
+```
+If everything is correctly configured up to this point, the model should print something on stdout, and the last line will be:
+
+```Successfully completed ICBC```
+
+The input directory now contains two more files:
+```
+ls -1 input
+test_001_DOMAIN000.nc
+test_001_ICBC.1990060100.nc
+test_001_ICBC.1990070100.nc
+test_001_LANDUSE
+test_001_SST.nc
+```
+The ICBC files contain the surface pressure, surface temperature, horizontal 3D wind components, 3D temperature and mixing ratio for the RegCM domain for the period and time resolution specified in the input file. Again you may want to use the GrADSNcPlot program to look at file content:
+```
+./bin/GrADSNcPlot input/test_001_ICBC.1990060100.nc
+```
+8. **First RegCM Model Simulation**
+   
+The model has now all needed data to allow you to launch a test simulation, the final goal of our little tutorial. The model command line now will differ if you have prepared the Serial or the MPI version. For the MPI enabled version we will assume that your machine is a dual core processor (baseline for current machines, even for laptops). Change the -np 2 argument to the number of processors you have on Your platform (on my laptop QuadCore I use -np 4).
+```
+• MPI version 1
+cd $REGCM_RUN
+mpirun -np 8 ./bin/regcmMPI test_001.in
+• Serial version 2
+cd $REGCM_RUN
+./bin/regcmSerial test_001.in
+```
