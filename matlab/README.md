@@ -387,12 +387,12 @@ end
 
 ## Submission
 
-You must use the `monteCarloPi_parallel` MATLAB script above as a starting point to accurately calculating $\pi$ over your cluster. Run the script on your most powerful node, and draw a table where you indicate how the number of samples changes with a change in the 'Maximum Number of Workers' and the 'Number of Chunks'.
+You must use the `monteCarloPi_parallel` MATLAB script above as a starting point to accurately calculating $\pi$ over your cluster. Clearly document and describe the changes that you have implemented. Run the script on your most powerful node, and draw a table where you indicate how the number of samples changes with a change in the 'Maximum Number of Workers' and the 'Number of Chunks'.
 
 After completing the above experiments, you may attempt to run the benchmark across multiple nodes using MPI.
 
 ```bash
-mpirun -np <N> --hostfile <PATH_TO_HOSTFILE> ./run_monteCarloPi_parallel.sh <PATH_TO_MATLAB_INSTALLATION>
+mpirun -np <N> --hostfile <PATH_TO_HOSTFILE> run_monteCarloPi_parallel.sh <PATH_TO_MATLAB_INSTALLATION>
 ```
 
 Submit your final script, your compiled binaries and your results. See if you can run the experiment for $10^12$ samples on your cluster.
