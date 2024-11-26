@@ -236,11 +236,11 @@ Further information can be found for `parfor` as well as additional information 
 * [Algorithm Acceleration Using Parallel for-Loops (parfor)](https://www.mathworks.com/help/coder/ug/acceleration-of-matlab-algorithms-using-parallel-for-loops-parfor.html) and
 * [Generate Parallel for-Loops Using the Open Multiprocessing (OpenMP) Application Interface](https://www.mathworks.com/help/ecoder/ug/Speed-Up-for-loop-implementation-in-the-Code-Generated-using-parfor.html).
 
-Essentially the variable `M` represents the number of OpenMP threads to parallelize the experiment over. Typically this will *match* the number of cores you have per node.
+Essentially the variable `M` represents the number of OpenMP threads to parallelize the experiment over. Typically this will *match* the number of cores you have per node. Observe the number of cores utilized using `btop` or `htop`.
 
 ```Matlab
 function monteCarloPi_parfor( N, M )
-  tic
+  ticnn
   ticBytes(gcp)
   % Maximum number of workers (threads) running in parallel
   % Use M=0 for serial, single core run
@@ -268,12 +268,17 @@ end
 
 This solution will eliminate the for-loop altogether and make use of MATLAB optimized matrix operations.
 
+There are also a number of random number generator algorithms for you to experiment with [Random Number Streams](https://www.mathworks.com/help/matlab/math/creating-and-controlling-a-random-number-stream.html).
+
 ```MATLAB
 function monteCarloPi_vectorized( N )
   tic;
   count = 0;
 
-  xy = rand(N,2);
+  % Example Random Number Generator Stream using SIMD Mersenne Twister Algorithm
+  % Make sure you test other algorithms, i.e.
+  xyStream = RandStream('dsfmt19937')
+  xy = rand(xystream,N,2);
   count = sum( sum( xy.^2, 2 ) <= 1 );
   piEst = 4*count/N;
   timeTaken = toc;
@@ -336,4 +341,65 @@ This will produce an executable binary which can be run directly from your shell
 
 As well as a shell script named `run_<your>monteCarloPi.sh`, which is used to configure the interpreter's runtime environment, which will assist you in running your script using `mpirun`. An example script is provided in `run_EXAMPLE_COMPILED.sh`
 
-Now you will attempt to run the benchmark with $N = 10^10$ samples
+Now you will attempt to run the benchmark with $N = 10^{10}$ samples. Observe the failure mode and use the random number generator within chunks of the `parfor` loop, optionally within a [Controlled Stream](https://www.mathworks.com/help/parallel-computing/repeat-random-numbers-in-parfor-loops.html).
+
+There are also a number of options for [initializing](https://www.mathworks.com/help/parallel-computing/parpool.html) the `parallel` pool across the cluster.
+
+```MATLAB
+function monteCarloPi_parallel( N, M, numChunks )
+  arguments
+  % Configure default arguments
+    N = 1e10;
+    M = <MAX_WORKERS>;
+    numChunks = 1e2;
+  end
+
+  tic;
+
+  piEst = 0
+
+  % Configure Parallel Computing environment
+  % parpool can take on values of `local`, `Threads`, `Processes`
+  % Experiment with these to determine the best results
+  mpiSettings = parcluster('local');
+  mpiSettings.NumWorkers = M;
+  saveProfile(mpiSettings);
+  pool = parpool('local', M);
+
+  xyStream = RandStream('Threefry);
+
+  parfor( i=1:numChunks, M )
+    count = 0;
+    xy = rand(xyStream, N/numChunks, 2);
+    count = sum( sum( xy.^2, 2 ) <=1 );
+    piEst = piEst + 4*count/(N/numChunks);
+  end
+
+  timeTaken = toc;
+  fprintf("Estimate for pi is %.8f after %f seconds using %f Bytes\n",piEst, timeTaken)
+  fprintf("Absolute error is %8.3e\n",abs(piEst2-pi))
+  fprintf("%.2f million samples per second\n", N/timeTaken/1e6)
+
+  delete(pool);
+end
+
+```
+
+## Submission
+
+You must use the `monteCarloPi_parallel` MATLAB script above as a starting point to accurately calculating $\pi$ over your cluster. Run the script on your most powerful node, and draw a table where you indicate how the number of samples changes with a change in the 'Maximum Number of Workers' and the 'Number of Chunks'.
+
+After completing the above experiments, you may attempt to run the benchmark across multiple nodes using MPI.
+
+```bash
+mpirun -np <N> --hostfile <PATH_TO_HOSTFILE> ./run_monteCarloPi_parallel.sh <PATH_TO_MATLAB_INSTALLATION>
+```
+
+Submit your final script, your compiled binaries and your results. See if you can run the experiment for $10^12$ samples on your cluster.
+
+> [!TIP]
+> If you have time available, consider exploring and replacing the Parallel For-Loop with [SPMD](https://www.mathworks.com/help/parallel-computing/spmd.html?searchHighlight=spmd&s_tid=srchtitle_support_results_1_spmd).
+>
+> You can also explore running the [HPC Challenge](https://www.mathworks.com/help/parallel-computing/benchmark-your-cluster-with-the-hpc-challenge.html) directly from within MATLAB.
+
+

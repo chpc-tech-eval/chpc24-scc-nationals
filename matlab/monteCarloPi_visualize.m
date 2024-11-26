@@ -1,4 +1,4 @@
-function monteCarloPiVis(N)
+function monteCarloPi_visualize(N)
 % Comments in MATLAB are denoted using '%'
 % N is the number of samples above where function monteCarloPiVis(N) is declared
 % D is the canvas for the plot
