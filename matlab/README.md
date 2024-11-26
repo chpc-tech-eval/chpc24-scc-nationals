@@ -101,11 +101,9 @@ Team Captains have been provided with the URL, Activation Key and Licensing info
 1. Select the products necessary to run the benchmarks.
    The license that you've been provided with grants you access to the full suite of MATLAB products. You are free to experiment with these until the conclusion of the competition. For the purposes of the competition you will require the following at the very least
    * MATLAB
-   * Simulink
-   * Curve Fitting Toolbox
-   * Global Optimization Toolbox
    * MATLAB Coder
    * MATLAB Compiler
+   * MATLAB Compiler SDK
    * Optimization Toolbox
    * Parallel Computing Toolbox
    <p align="center"><img alt="Matlab 2024B Linux Installation" src="./resources/matlab_gui_toolboxes.png" width=600 /></p>
@@ -145,25 +143,25 @@ For now carefully copy and paste the code as it is for now for the purposes of p
 
 ```matlab
 function monteCarloPiVis(N)
-% Comments in MATLAB are denoted using '%'
-% N is the number of samples above where function monteCarloPiVis(N) is declared
-% D is the canvas for the plot
-D = 1000;
+  % Comments in MATLAB are denoted using '%'
+  % N is the number of samples above where function monteCarloPiVis(N) is declared
+  % D is the canvas for the plot
+  D = 1000;
 
-% points are the ones we mark for plotting purposes
-% points is initialized to D x D array or "grid"" of zeroes
-points = zeros(D);
+  % points are the ones we mark for plotting purposes
+  % points is initialized to D x D array or "grid"" of zeroes
+  points = zeros(D);
 
-% Initialize the number of points which satisfy the "within circle radius" check
-count = 0;
+  % Initialize the number of points which satisfy the "within circle radius" check
+  count = 0;
 
-% Plotting utilities
-fig = gcf;
-figure(gcf);
+  % Plotting utilities
+  fig = gcf;
+  figure(gcf);
 
-% Monte Carlo "for loop", iterating over N samples
-% Simplified version without plotting utilities described in the next section.
-for i = 1:N
+  % Monte Carlo "for loop", iterating over N samples
+  % Simplified version without plotting utilities described in the next section.
+  for i = 1:N
     if mod( i, 5e3 ) == 0
         colormap( [1 1 1; 1 0 0; 0 1 0; 0 0 1] );
         image( points );
@@ -179,6 +177,7 @@ for i = 1:N
     else
         points( round(x*(D-1))+1, round(y*(D-1)+1)) = 4;
     end
+  end
 end
 ```
 
@@ -191,25 +190,25 @@ Save the following MATLAB script as `monteCarloPi.m` and use it to run the exper
 
 ```matlab
 function monteCarloPi(N)
-% N is number of samples
-% tic is used to start a timer
-% toc is use to measure time taken to run benchmark
+  % N is number of samples
+  % tic is used to start a timer
+  % toc is use to measure time taken to run benchmark
 
-tic
-count = 0;
-for i=1:N
+  tic
+  count = 0;
+  for i=1:N
     x = rand();
     y = rand();
     r = sqrt(x^2 + y^2);
     if r < 1
         count = count + 1;
     end
-end
-estimatePi = 4*count/N;
-timeTaken = toc;
+  end
+  estimatePi = 4*count/N;
+  timeTaken = toc;
 
-fprintf("Estimate for pi is %.8f after %f seconds\n", estimatePi, timeTaken)
-fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
+  fprintf("Estimate for pi is %.8f after %f seconds\n", estimatePi, timeTaken)
+  fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
 end
 
 ```
@@ -232,40 +231,61 @@ You will now be parallelizing, improving and enhancing your simulation using the
 
 ### Replace the `for` loop statement with the parallel `parfor` loop statement:
 
-Further information can be found for `parfor` from the [MATLAB Par-For Documentation](https://www.mathworks.com/help/parallel-computing/parfor.html). Additional documentation can be found [Algorithm Acceleration Using Parallel for-Loops (parfor)](https://www.mathworks.com/help/coder/ug/acceleration-of-matlab-algorithms-using-parallel-for-loops-parfor.html) and [Generate Parallel for-Loops Using the Open Multiprocessing (OpenMP) Application Interface](https://www.mathworks.com/help/ecoder/ug/Speed-Up-for-loop-implementation-in-the-Code-Generated-using-parfor.html).
+Further information can be found for `parfor` as well as additional information can be found here:
+* [MATLAB Par-For Documentation](https://www.mathworks.com/help/parallel-computing/parfor.html),
+* [Algorithm Acceleration Using Parallel for-Loops (parfor)](https://www.mathworks.com/help/coder/ug/acceleration-of-matlab-algorithms-using-parallel-for-loops-parfor.html) and
+* [Generate Parallel for-Loops Using the Open Multiprocessing (OpenMP) Application Interface](https://www.mathworks.com/help/ecoder/ug/Speed-Up-for-loop-implementation-in-the-Code-Generated-using-parfor.html).
 
 Essentially the variable `M` represents the number of OpenMP threads to parallelize the experiment over. Typically this will *match* the number of cores you have per node.
 
 ```Matlab
 function monteCarloPi_parfor( N, M )
-
-tic
-ticBytes(gcp)
-% Maximum number of workers (threads) running in parallel
-% Use M=0 for serial, single core run
-M = <NUM_CORES>
-count = 0;
-parfor( i=1:N, M )
+  tic
+  ticBytes(gcp)
+  % Maximum number of workers (threads) running in parallel
+  % Use M=0 for serial, single core run
+  M = <NUM_CORES>
+  count = 0;
+  parfor( i=1:N, M )
     x = rand();
     y = rand();
     r = sqrt(x^2 + y^2);
     if r < 1
         count = count + 1;
     end
-end
-estimatePi = 4*count/N;
-timeTaken = toc;
-dataTransfered = tocBytes(gcp);
+  end
+  estimatePi = 4*count/N;
+  timeTaken = toc;
+  dataTransfered = tocBytes(gcp);
 
-fprintf("Estimate for pi is %.8f after %f seconds\n" with %f Bytes transfered between worker nodes, estimatePi, timeTaken, dataTransfered)
-fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
+  fprintf("Estimate for pi is %.8f after %f seconds\n" with %f Bytes transfered between worker nodes, estimatePi, timeTaken, dataTransfered)
+  fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
 end
 
 ```
 
-### Experiment with a vectorized implementation
+### Experiment with preallocation as well as a vectorized implementation
 
-This solution will eliminate the for-loop altogether and make use of MATLAB optimized matrix operations. Where the relevant parts of the algorithm can be broken down as follows:
+This solution will eliminate the for-loop altogether and make use of MATLAB optimized matrix operations.
+
+```MATLAB
+function monteCarloPi_vectorized( N )
+  tic;
+  count = 0;
+
+  xy = rand(N,2);
+  count = sum( sum( xy.^2, 2 ) <= 1 );
+  piEst = 4*count/N;
+  timeTaken = toc;
+
+  fprintf("Estimate for pi is %.8f after %f seconds using %f Bytes\n",piEst, timeTaken)
+  fprintf("Absolute error is %8.3e\n",abs(piEst2-pi))
+  fprintf("%.2f million samples per second\n", N/timeTaken/1e6)
+
+end
+
+```
+The creation of an `N x 2` array `xy` if known as [Preallocation](https://www.mathworks.com/help/matlab/matlab_prog/preallocating-arrays.html). Where the relevant parts of the algorithm can be broken down as follows:
 
 * Instead of individually instantiating the `rand()` function and assigning the scalars `x` and `y`, generate an array of dimension `N x 2`.
 ```math
@@ -289,9 +309,9 @@ xy.^2 =
   \end{array} } \right]
 ```
 
-* Next there is a pair-wise inner summation which is tested to lie within a unit circle:
+* Next there is a pair-wise inner summation which is tested to lie within a unit circle, i.e. `sum(xy.^2, 2) <= 1`:
 ```math
-sum(xy.^2, 2) <= 1 =
+ =
   \left[ {\begin{array}{cc}
     (x_{1}^2 + y_{1}^2) & \le 1\\
     (x_{2}^2 + y_{2}^2) & \le 1\\
@@ -299,26 +319,21 @@ sum(xy.^2, 2) <= 1 =
     (x_{N}^2 + y_{N}^2) & \le 1\\
   \end{array} } \right]
 ```
+* This results in an `N x 1` column array of `true` or `false` conditionals each time the condition $x_{i}^2 + y_{i}^2 \le 1$ is satisfied or not.
 
-* Lastly, the outer summation counts the number of occurrences for which the above conditional test is true.
+* Lastly, the outer summation counts the number of occurrences for which the above conditional test is `true`, i.e. sum all he ones`[1]` in the `N x 1` column array.
 
-```MATLAB
-function monteCarloPi_vectorized( N )
-tic;
-count = 0;
+## Run the Benchmark over your cluster
 
-%
-xy = rand(N,2);
-count = sum( sum( xy.^2, 2 ) <= 1 );
-piEst = 4*count/N;
-timeTaken = toc;
-
-%fprintf("Estimate for pi is %.8f after %f seconds using %f Bytes\n",piEst, timeTaken)
-fprintf("Absolute error is %8.3e\n",abs(piEst2-pi))
-fprintf("%.2f million samples per second\n", N/timeTaken/1e6)
-
-end
-
+To assist you in running across your clusters, you will be making use of the MATLAB C Compiler to produce and object file or executable binary.
+```bash
+mcc -m <your>monteCarloPi.m
+```
+This will produce an executable binary which can be run directly from your shell:
+```bash
+./<your>monteCarloPi
 ```
 
-## Run the Benchmark Over your Entire Cluster Using MPI
+As well as a shell script named `run_<your>monteCarloPi.sh`, which is used to configure the interpreter's runtime environment, which will assist you in running your script using `mpirun`. An example script is provided in `run_EXAMPLE_COMPILED.sh`
+
+Now you will attempt to run the benchmark with $N = 10^10$ samples
