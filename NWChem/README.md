@@ -89,21 +89,21 @@ make -j<Num_Procs> >& make_logfile.log
 Detailed instructions and explainations of building, compiling and installing NWChem can be found here ***https://nwchemgit.github.io/Compiling-NWChem.html.***
 
 
-# Density functional calculation of a zeolite fragment
+## Density functional calculation of a zeolite fragment
 This section is about finding the benchmark results with NWChem 7.2.0 for LDA calculations (energy plus gradient) on a 533 atoms siosi8 zeolite fragment. The input uses an atomic orbital basis set with 7108 functions and a charge density fitting basis with 16501 functions. 
 
-## Input file 
+### Input file 
 The input file can be downloaded on this link **https://nwchemgit.github.io/benchmarks/siosi8.nw** 
 
 Submit your output energy calculation results including wall time (s) to the judges. 
 
 Run the application within 2hr walltime across at your nodes
 
-## set environment variaable/PATHS 
+### set environment variaable/PATHS 
 
 If NWChem is not installed through modules, you may need to ensure the environment variables (such as PATH and LD_LIBRARY_PATH) are set correctly to locate the NWChem executable.
 
-## writing a submission script  
+### Run the benchmark
 - Run NWChem with your input file 
 
 ```bash
@@ -112,7 +112,7 @@ disown -h
 
 ```
 
-## Analyze your ouput 
+### Analyze your ouput 
 ```bash
 cat output.log
 ```
