@@ -15,25 +15,22 @@ DockerHub account hosts a number of different images of the various Lightning pl
 
 PennyLane requires Python version 3.10 and above. Installation of PennyLane, as well as all dependencies, will be done using `pip`.
 
-## Install PyPI and JupterLab
+## Install PyPI and JupyterLab
 
 [Project Jupyter](https://jupyter.org/) provides powerful tools for scientific investigations due to their interactive and flexible nature. Jupyter Notebooks provide a versatile and powerful environment for conducting scientific investigations, facilitating both the analysis and the clear communication of results.
 
 1. Install all the prerequisites and dependencies
    * DNF / YUM
-
      ```bash
      # RHEL, Rocky, Alma, CentOS Stream
      sudo dnf install python python-pip
      ```
    * APT
-
      ```bash
      # Ubuntu
      sudo apt install python python-pip
      ```
    * Pacman
-
      ```bash
      # Arch
      sudo dnf install python python-pip
