@@ -326,7 +326,7 @@ xy.^2 =
 ```
 * This results in an `N x 1` column array of `true` or `false` conditionals each time the condition $x_{i}^2 + y_{i}^2 \le 1$ is satisfied or not.
 
-* Lastly, the outer summation counts the number of occurrences for which the above conditional test is `true`, i.e. sum all he ones`[1]` in the `N x 1` column array.
+* Lastly, the outer summation counts the number of occurrences for which the above conditional test is `true`, i.e. sum all the ones`[1]` in the `N x 1` column array.
 
 ## Run the Benchmark over your cluster
 
@@ -366,7 +366,7 @@ function monteCarloPi_parallel( N, M, numChunks )
   saveProfile(mpiSettings);
   pool = parpool('local', M);
 
-  xyStream = RandStream('Threefry);
+  xyStream = RandStream('Threefry');
 
   parfor( i=1:numChunks, M )
     count = 0;
