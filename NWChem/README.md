@@ -97,7 +97,7 @@ The input file can be downloaded on this link **https://nwchemgit.github.io/benc
 
 Submit your output energy calculation results including wall time (s) to the judges. 
 
-Run the application within 2hr walltime across at your nodes
+Run the application within a 2hr walltime across at your nodes
 
 ### set environment variaable/PATHS 
 
