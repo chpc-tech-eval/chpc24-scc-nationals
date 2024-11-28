@@ -80,16 +80,15 @@ pip install pennylane --upgrade
 # or you can explicitly install lightning, which will also pull pennylane dependencies.
 # pip install penylane-lightning
 ```
-The Lightning plugin ecosystem provides fast state-vector and tensor network simulators written in C++ `lightning.qubit` device uses a custom-built backend to perform fast linear algebra calculations for simulating quantum state-vector evolution, you can find more details about it [here]()
-
+The Lightning plugin ecosystem provides fast state-vector and tensor network simulators written in C++ `lightning.qubit` device uses a custom-built backend to perform fast linear algebra calculations for simulating quantum state-vector evolution, you can find more details about it at [Lightning Documentation](https://docs.pennylane.ai/projects/lightning/en/stable/index.html).
 
 # Variational Quantum Eigensolver (VQE)
 
-In this benchmark you will be reproducing the results from the recent paper published by some of Xanadu's authors [Hybrid quantum programming with PennyLane Lightning on HPC platforms](https://arxiv.org/abs/2403.02512)
+In this benchmark you will be reproducing the results from the recent paper published by some of Xanadu's authors [Hybrid quantum programming with PennyLane Lightning on HPC platforms](https://arxiv.org/abs/2403.02512).
 
-Add some flavour text to explain whats going on
+The [Variational Quantum Eigensolver](https://www.youtube.com/watch?v=YtepXvx5zdI) (VQE) is one of the flagship algorithms for quantum chemistry which utilizes the [Rayleigh-Ritz Method](https://en.wikipedia.org/wiki/Rayleigh%E2%80%93Ritz_method) where near-term quantum computers are trained to determine the ground-state of a given molecule.
 
-...
+You do not need to worry about the details of the implementation, but the VQE Algorithm takes (i) a molecular Hamiltonian and a parametrized circuit preparing the quantum state of the molecule as inputs.
 
 and save the following as a `lightning_qubit.py`
 
