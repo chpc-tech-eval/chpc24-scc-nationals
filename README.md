@@ -27,7 +27,7 @@ Rulings and decisions from the competition organizers are final.
 Good Luck!
 
 # Timetable
-<iframe src="./CHPC_2024_SCC_National_Meeting_Timetable.pdf" width="100%" height="600px"></iframe>
+![CHPC2024 Nationals Timetable](./CHPC_2024_SCC_National_Meeting_Timetable.png)
 
 
 # Scoring
