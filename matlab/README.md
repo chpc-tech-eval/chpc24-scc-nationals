@@ -240,7 +240,7 @@ Essentially the variable `M` represents the number of OpenMP threads to parallel
 
 ```Matlab
 function monteCarloPi_parfor( N, M )
-  ticnn
+  tic
   ticBytes(gcp)
   % Maximum number of workers (threads) running in parallel
   % Use M=0 for serial, single core run
@@ -258,7 +258,7 @@ function monteCarloPi_parfor( N, M )
   timeTaken = toc;
   dataTransfered = tocBytes(gcp);
 
-  fprintf("Estimate for pi is %.8f after %f seconds\n" with %f Bytes transfered between worker nodes, estimatePi, timeTaken, dataTransfered)
+  fprintf("Estimate for pi is %.8f after %f seconds with %f Bytes transfered between worker nodes\n", estimatePi, timeTaken, dataTransfered)
   fprintf("Absolute error is %8.3e\n", abs( estimatePi-pi ))
 end
 
