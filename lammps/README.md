@@ -51,38 +51,41 @@ make -j <N>
 ```
 
 ### Verification
-Run a test case to verify the installation:
+Run a test case to verify the installation by running the benchmark in serial mode:
 
 ```bash
 cd ../bench
-mpirun -np 4 ../build/lmp -in in.lj
+../build/lmp -in in.lj
 ```
 
-# Benchmark 1: Polymer Chain Melt (Serial)
-Copy the Polymer chain melt benchmark file from the benchmark folder:
+# Benchmark 1: Polymer Chain Melt
+The Polymer chain melt benchmark input file should be in the benchmark folder (bench) :
 
-```bash
-$ cp /path/to/PolymerChainMeltBenchmark.tar.gz ~/<path to benchmark>
-```
 
-Extract and configure the simulation files. Edit input files to set up a single-core test:
+Edit and configure the input simulation file (in.chain) :
 
 ```config
 units       lj
 atom_style  molecular
 pair_style  lj/cut 2.5
 ```
-Run the benchmark in serial mode:
+Set the number of OMP threads
 
 ```bash
-$ ./lmp -in in.polymer_chain_melt > serial-output.out
+export OMP_NUM_THREADS=1
+```
+
+Run the benchmark in parallel mode:
+
+```bash
+mpirun -np <CORES> ../build/lmp -in in.chain > parallel-output-<CORES>.out
 ```
 
 # Benchmark 1: Parallel Efficiency Investigation
-Repeat the benchmark in parallel mode to study performance scaling:
+Repeat the benchmark in parallel mode with different configurations to study performance scaling:
 
 ```bash
-$ mpirun -np <CORES> ./lmp -in in.polymer_chain_melt > parallel-output-<CORES>.out
+mpirun -np <CORES> ../build/lmp -in in.chain > parallel-output-<CORES>.out
 ```
 
 Collect run times and analyze results across different core counts.
