@@ -23,39 +23,39 @@ Download LAMMPS from the [LAMMPS official website](https://docs.lammps.org/Insta
 ### Download source as a tarball
 
 ```bash
-$ wget https://download.lammps.org/tars/lammps-29Aug2024_update1.tar.gz
+wget https://download.lammps.org/tars/lammps-29Aug2024_update1.tar.gz
 ```
 Unpack the source files to your installation directory:
 ```bash
-$ tar -xzf lammps-29Aug2024_update1.tar.gz
+tar -xzf lammps-29Aug2024_update1.tar.gz
 ```
 
 
 ### Downlaod source with git
 
 ```bash
-$ git clone https://github.com/lammps/lammps.git
-$ cd lammps
-$ git checkout stable_29Aug2024_update1
+git clone https://github.com/lammps/lammps.git
+cd lammps
+git checkout stable_29Aug2024_update1
 ```
 
 ## Building and Deploying LAMMPS
 After downloading, navigate to the source directory and compile with desired options:
 
 ```bash
-$ cd stable_29Aug2024_update1
-$ mkdir build
-$ cd build
-$ cmake ../cmake -D BUILD_MPI=ON -D BUILD_OMP=ON
-$ make -j <N>
+cd stable_29Aug2024_update1
+mkdir build
+cd build
+cmake ../cmake -D BUILD_MPI=ON -D BUILD_OMP=ON
+make -j <N>
 ```
 
 ### Verification
 Run a test case to verify the installation:
 
 ```bash
-$ cd ../bench
-$ mpirun -np 4 ./lmp -in in.lj
+cd ../bench
+mpirun -np 4 ../build/lmp -in in.lj
 ```
 
 # Benchmark 1: Polymer Chain Melt (Serial)
