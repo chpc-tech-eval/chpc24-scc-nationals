@@ -31,7 +31,7 @@ tar -xzf lammps-29Aug2024_update1.tar.gz
 ```
 
 
-### Downlaod source with git
+### Download source with git
 
 ```bash
 git clone https://github.com/lammps/lammps.git
