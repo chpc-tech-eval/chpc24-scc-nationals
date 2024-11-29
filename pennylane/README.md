@@ -88,7 +88,9 @@ In this benchmark you will be reproducing the results from the recent paper publ
 
 The [Variational Quantum Eigensolver](https://www.youtube.com/watch?v=YtepXvx5zdI) (VQE) is one of the flagship algorithms for quantum chemistry which utilizes the [Rayleigh-Ritz Method](https://en.wikipedia.org/wiki/Rayleigh%E2%80%93Ritz_method) where near-term quantum computers are trained to determine the ground-state of a given molecule.
 
-You do not need to worry about the details of the implementation, but the VQE Algorithm takes (i) a molecular Hamiltonian and a parametrized circuit preparing the quantum state of the molecule as inputs.
+You do not need to worry about the details of the implementation, but the VQE Algorithm takes (i) a molecular Hamiltonian and a parametrized circuit preparing the quantum state of the molecule as inputs. The **Cost Function** is then defined as the expectation value of the Hamiltonian in the initial trial state. Performing an iterative minimization of this cost function is the how we obtained the desired ground state, using a classical optimizer which leverages a quantum computer to calculate the gradient of the cost function at each optimization step.
+
+The following Python script calculates the total en
 
 and save the following as a `lightning_qubit.py`
 
