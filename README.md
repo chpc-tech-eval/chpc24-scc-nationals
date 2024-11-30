@@ -1,6 +1,6 @@
-CHPC 2023 Student Cluster Competition
+CHPC 2024 Student Cluster Competition
 ========================================
-Benchmarking and Competition instructions for the Center for High Performance Computing (CHPC) 2023 Student Cluster Compettion (SCC). Which is hosted by the National Integrated Cyber Infrastructure Systems (NICIS), a division of the South African Council for Scientific and Industrial Research (CSIR). For 2023 the competition will be held in person at the Kruger Gate Hotel in Mpumalanga, South Africa.
+Benchmarking and Competition instructions for the Center for High Performance Computing (CHPC) 2024 Student Cluster Compettion (SCC). Which is hosted by the National Integrated Cyber Infrastructure Systems (NICIS), a division of the South African Council for Scientific and Industrial Research (CSIR). For 2024 the competition will be held in person at the Broadwalk International Convention Centre, Gqeberha, South Africa.
 
 # Getting Started
 
@@ -10,38 +10,43 @@ You are strongly encouraged to make use of any resource available to you. Howeve
 
 Team mentors are encouraged to support and motivate their teams. However, they may not do any of the work for the students. They are strictly there to provide guidance and suggestions, and are there to participate in the conference for their own benefit as well.
 
-Team captains will each be issued a competition USB flash drive. This is how the teams will be issued with their benchmarks and how teams will submit their results. Only the Team captain can approach the organizers’ booth, to submit and/or receive benchmarks. Only one Team captain is allowed at the organizer's booth at any time.
+Team captains will each be issued a competition USB flash drive. This is how the teams may be given input files and how teams will submit their results. Only the Team captain can approach the organizers’ booth, to submit and/or receive any relevant input files. Only one Team captain is allowed at the organizer's booth at any time.
 
-To receive the next set of benchmarks, you will need to make a valid submission of the previous benchmark. Alternatively, you may forfeit penalty points should you be unable to submit a preceding result but want to attempt the next benchmark. The benchmarks will get progressively harder.
+## Competition Rules: Submission Guidelines
+
+Benchmarks must be submitted by the deadline as specified in the timetable. Resubmission of a previously submitted benchmark will only be allowed if the benchmarks due on that day have been completed and submitted, and the benchmark being resubmitted was originally submitted before its due date. If a team misses a submission deadline and wishes to submit the benchmark for a pass, they may do so only if the benchmarks due on that day have already been submitted. A late submission penalty of 10% will be applied for each day the missed benchmark is late, calculated from its original submission date.
+
+It is important to note that only valid submissions will be considered. For a submission to be valid, **all required deliverables** for each of the benchmarks must be met. If a team completes the benchmarks scheduled for a particular day ahead of the deadline, they may submit them and move on to the next set. However, approval from the organizers is mandatory before proceeding, and no new benchmarks may be started until the current set has been validly submitted.
 
 The competition organizers will give teams a general indication of where they should be, in the morning at the beginning of the day, and again in the afternoon at the end of the day.
 
-The competition will end on **Thursday, 7<sup>th</sup> of December at 10:00am**.
+The competition will end on **Wednesday, 4<sup>th</sup> of December at 12:00am midday**.
 
 Rulings and decisions from the competition organizers are final.
 
 Good Luck!
 
 # Timetable
+![CHPC2024 Nationals Timetable](./CHPC_2024_SCC_National_Timetable.png)
 
-<img width="800px" src="./CHPC23_SCC_Conference_Timetable.png" alt="CHPC23 SCC National Conference" />
 
 # Scoring
 
 | Application   | Weight | Breakdown                                                                                                                                  |
 | ---           |    --- | ---                                                                                                                                        |
 | HPCC & HPCG   |    20% | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul>                                    |
-| OpenFOAM      |    10% | <ul><li>Parallel Efficiency Investigation *[4%]*<ul><li>ParaView Visualization *[2%]*</li></ul><li>Simple Benchmark Large *[4%]*</li></ul> |
-| AmberMD       |    10% | <ul><li>Explicit Solvent: JAC_Production_NPT_4fs *[2%]* & Solvent: JAC_Production_NVE_4fs *[2%]*<li>Implicit Solvent: Myoglobin *[3%]*<li>Implicit Solvent: Nucleosome *[3%]*</li></ul> |
-| WRF           |    10% | <ul><li>Single Domain Case *[4%]*<ul><li> NCL Visualization *[2%]*</li></ul><li>Nested Two-Domain Case *[4%]*</li></ul>                    |
-| SwiftSIM      |    10% | <ul><li>Isolated Galaxy Potential *[4%]*<ul><li> PySPHViewer *[2%]*</li></ul><li>Eagle 25 *[4%]*</li></ul>                                 |
-| MILC          |    10% | NERSC MILC Medium *[10%]*                                                                                                                  |
-| Qiskit-Aer    |    10% | <ul><li>Quantum Volume Experiment *[4%]*<ul><li> Graphs: QV Simulation Time vs Number of Qubits *[2%]*</li></ul><li>Multinode MPI Run *[4%]*</li></ul>                                 |
-| Presentation  |    20% | <ul><li>Judges' Scores *[10%]*<li>Cluster Configurations *[5%]*<li>Fan Favorite *[5%]*</li></UL>                                           |
+|   MILC   |   10%  |  |
+|   MATLAB Coding Challenge   | 10%    |  |
+|   LAMMPS  | 10%     |  |
+|   NWChem   |  10%   |  |
+|   PennyLane |  10%   |  |
+|   RegCM   |   10%  |  |
+| Fan Favorite | 5% | 
+| Presentation  |    15% | <ul><li>Judges' Scores *[5%]*<li>Cluster Configurations *[5%]*<li>Poster *[5%]*</li></UL>                                           |
 
 # Instructions for Mentors
 
-The role of Mentors and Volunteers is to provide leadership and guidance for the student competitors participating in this year's Center for High Performance Computing 2023 Student Cluster Competition.
+The role of Mentors and Volunteers is to provide leadership and guidance for the student competitors participating in this year's Center for High Performance Computing 2024 Student Cluster Competition.
 
 In preparing your teams for the competition, your main goal is to ensure that you teach and impart knowledge to the student participants in such a way that they are empowered and enable to tackle the problems and benchmarking tasks themselves.
 
@@ -53,9 +58,7 @@ Any mentors found to be directly in contravention of this rule, may result in th
 
 ## Main Conference Participation
 
-In addition to supporting their teams, mentors are also **strongly** encouraged to participate in the Main Conference. Shuttles will be available between the Skukuza Safari Lodge *(Main Conference Venue)* and the Kruger Gate Hotel *(Student Cluster Competition Venue)*.
-
-There are a number of interesting talks, panels, workshops, tutorials and tracks [scheduled](https://events.chpc.ac.za/event/125/timetable/#all.detailed) for this year's conference. Coordinate and plan with your teams accordingly, so that you may make the best use of your time here by providing support, as well as enjoying and learning from the conference.
+In addition to supporting their teams, mentors are also **strongly** encouraged to participate in the Main Conference. There are a number of interesting talks, panels, workshops, tutorials and tracks [scheduled](https://events.chpc.ac.za/event/139/timetable/#20241201) for this year's conference. Coordinate and plan with your teams accordingly, so that you may make the best use of your time here by providing support, as well as enjoying and learning from the conference.
 
 # Cheat Sheet
 
@@ -84,5 +87,4 @@ Below is a table with a number of Linux system commands and utilities that you *
 | lshw               | Hardware probing utility that provides detailed info about various components.                                                                                                                                     |
 | proc               | Information and control center of the kernel, providing a communications channel between kernel space and user space. Many of the preceding commands query information provided by proc, i.e. `cat /proc/cpuinfo`. |
 | uname              | Useful for determining information about your current flavor and distribution of your operating system and its version.                                                                                            |
-| lsblk              | Provides information about block devices (disks, hard drives, flash drives, etc) connected to your system and their partitioning schemes.                                                                          |
-|                    |                                                                                                                                                                                                                    |
+| lsblk              | Provides information about block devices (disks, hard drives, flash drives, etc) connected to your system and their partitioning schemes.                                                                          
