@@ -7,12 +7,12 @@ Your team will need to compile and run the **HPCC** benchmark suite. This code i
 
 You need to run version *1.5.0*, which is available for download from the following website:
 ```bash
-$ wget https://hpcchallenge.org/projectsfiles/hpcc/download/hpcc-1.5.0.tar.gz
+wget https://hpcchallenge.org/projectsfiles/hpcc/download/hpcc-1.5.0.tar.gz
 ```
 
 Alternatively the source can be obtained from GitHub:
 ```bash
-$ git clone https://github.com/icl-utk-edu/hpcc
+git clone https://github.com/icl-utk-edu/hpcc
 ```
 
 If you can produce a higher individual **HPL** score outside of **HPCC** (through use of alternate software or hardware), you may include this result to supplement your HPCC submission for judging.
@@ -27,12 +27,12 @@ The general prescription that can be used to build **HPL**, is as follows:
 - Copy an HPL template `Makefile` from `hpl/setup` to `hpl` and make appropriate changes to `MPI` and `BLAS` sections, 
 - Compile HPCC
   ```bash
-  $ make <target>
+  make <target>
   ```
 - Edit the `hpccinf.txt` file and configure the *HPL parameters (N, NB, P and Q)* for your cluster.
 - Run the benchmark using MPI:
   ```bash
-  $ mpirun -np <N> -hostfile <path_to_hostfile> ./hpcc
+   mpirun -np <N> -hostfile <path_to_hostfile> ./hpcc
   ```
 ## Tuning HPL.dat file
 
@@ -42,7 +42,7 @@ For guidance, use online resources, such as [HPL Calculator](https://www.advance
 
 To easily interpret the benchmark results, you can use the script provided `format.pl`:
 ```bash
-$ perl format.pl -w -f hpccoutf.txt
+ perl format.pl -w -f hpccoutf.txt
 ```
 
 For each of your respective build(s) and run(s), you must submit your:
@@ -63,7 +63,7 @@ High Performance Conjugate Gradients
 
 There is little setup and configuration required for this benchmark, so limited guidance is provided. A reference version of **HPCG** is available for download, which you can compile and run:
 ```bash
-$ wget https://hpcg-benchmark.org/downloads/hpcg-3.1.tar.gz
+wget https://hpcg-benchmark.org/downloads/hpcg-3.1.tar.gz
 ```
 
 Alternatively the source can be obtained from GitHub:
