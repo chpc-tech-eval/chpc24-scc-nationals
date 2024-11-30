@@ -32,17 +32,17 @@ Good Luck!
 
 # Scoring
 
-| Application                            | Weight | Breakdown                                                                                               |
-|----------------------------------------|--------|---------------------------------------------------------------------------------------------------------|
-| (Sunday 18:00) HPCC & HPCG             | 20%    | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul> |
-| (Monday 18:00) MILC                    | 10%    |                                                                                                         |
-| (Monday 18:00) MATLAB Coding Challenge | 10%    |                                                                                                         |
-| (Tuesday 18:00) LAMMPS                 | 10%    |                                                                                                         |
-| (Tuesday 18:00) NWChem                 | 10%    |                                                                                                         |
-| (Tuesday 18:00) PennyLane              | 10%    |                                                                                                         |
-| (Wednesday 12:00) RegCM                | 10%    |                                                                                                         |
-| Fan Favorite                           | 5%     |                                                                                                         |
-| Presentation                           | 15%    | <ul><li>Judges' Scores *[5%]*<li>Cluster Configurations *[5%]*<li>Poster *[5%]*</li></UL>               |
+| Application             | Deadline        | Weight | Breakdown                                                                                               |
+|-------------------------|-----------------|--------|---------------------------------------------------------------------------------------------------------|
+| HPCC & HPCG             | Sunday 18:00    | 20%    | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul> |
+| MILC                    | Monday 18:00    | 10%    |                                                                                                         |
+| MATLAB Coding Challenge | Monday 18:00    | 10%    |                                                                                                         |
+| LAMMPS                  | Tuesday 18:00   | 10%    |                                                                                                         |
+| NWChem                  | Tuesday 18:00   | 10%    |                                                                                                         |
+| PennyLane               | Tuesday 18:00   | 10%    |                                                                                                         |
+| RegCM                   | Wednesday 12:00 | 10%    |                                                                                                         |
+| Fan Favorite            |                 | 5%     |                                                                                                         |
+| Presentation            |                 | 15%    | <ul><li>Judges' Scores *[5%]*<li>Cluster Configurations *[5%]*<li>Poster *[5%]*</li></UL>               |
 
 # Instructions for Mentors
 
