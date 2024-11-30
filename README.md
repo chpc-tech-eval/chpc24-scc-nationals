@@ -14,11 +14,11 @@ Team captains will each be issued a competition USB flash drive. This is how the
 
 ## Competition Rules: Submission Guidelines
 
-Benchmarks must be submitted by the deadline as specified in the timetable. Resubmission of a previously submitted benchmark will only be allowed if the benchmarks due on that day have been completed and submitted, and the benchmark being resubmitted was originally submitted before its due date. If a team misses a submission deadline and wishes to submit the benchmark for a pass, they may do so only if the benchmarks due on that day have already been submitted. A late submission penalty of 10% will be applied for each day the missed benchmark is late, calculated from its original submission date.
+Benchmarks must be submitted by the deadline as specified in the timetable. Re-submission of a previously submitted benchmark result(s) will only be allowed if those benchmark(s) were originally submitted on time, before the initial deadline(s). If a team misses a submission deadline and wishes to submit a previous benchmark result for assessment, they may do so only if **all** of the benchmarks due on that day have already been submitted. A **late submission penalty of 10% will be applied for each day** the missed benchmark is late, calculated from its original submission date.
 
-It is important to note that only valid submissions will be considered. For a submission to be valid, **all required deliverables** for each of the benchmarks must be met. If a team completes the benchmarks scheduled for a particular day ahead of the deadline, they may submit them and move on to the next set. However, approval from the organizers is mandatory before proceeding, and no new benchmarks may be started until the current set has been validly submitted.
+It is important to note that only valid submissions will be considered. For a submission to be valid, **all required deliverables** for each of the benchmarks must be met. If a team completes the benchmarks scheduled for a particular day ahead of the deadline, they may submit them and move on to the next set. However, approval from the organizers is mandatory before proceeding. Teams may not consult the organizers for assistance with any other (prior and upcoming) benchmarks until valid results have been submitted for all of the current day's benchmarks.
 
-The competition organizers will give teams a general indication of where they should be, in the morning at the beginning of the day, and again in the afternoon at the end of the day.
+The competition organizers will give teams a general indication of where they should be in the morning, at the beginning of the day and again in the afternoon, at the end of the day.
 
 The competition will end on **Wednesday, 4<sup>th</sup> of December at 12:00am midday**.
 
