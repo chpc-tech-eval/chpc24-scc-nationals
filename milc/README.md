@@ -9,15 +9,15 @@ The MILC Code is a body of high performance research software written in C (with
 
 A copy of the source code can be obtained from GitHub:
 ```bash
-$ git clone https://github.com/milc-qcd/milc_qcd.git
+git clone https://github.com/milc-qcd/milc_qcd.git
 ```
 
 ## Checkout the development branch
 
 The *default* `master` branch of the repository is not well maintained. For that reason you will be working on the `development` branch:
 ```bash
-$ cd milc_qcd
-$ git checkout develop
+cd milc_qcd
+git checkout develop
 ```
 
 # Model of Interest
@@ -25,14 +25,14 @@ $ git checkout develop
 A number of different models are available for running the simulation. The model that you will be building and compiling to run the benchmark, utilizes the RHMC algorithm (Rational Hybrid Monte Carlo) which in turn uses rational function approximations for the *"fermion"* determinants when generating the lattices. *(Where protons and neutrons are comprised of so-called quarks, electrons are themselves considered fundamental and are known as fermions.)*
 
 ```bash
-$ cd ks_imp_rhmc
+cd ks_imp_rhmc
 ```
 ## Build, Configure and Compile
 
 Copy and edit the `Makefile` from the parent directory:
 
 ```bash
-$ cp ../Makefile .
+cp ../Makefile .
 ```
 
 You'll need to make the following changes:
@@ -54,7 +54,7 @@ OMP=true
 After modifying all of the appropriate `make` files, build the executable binary and redirect the output to a log file:
 
 ```bash
-$ make su3_rhmd_hisq 2>&1 | tee make_logfile.log
+make su3_rhmd_hisq 2>&1 | tee make_logfile.log
 ```
 
 ### Remember to Clean Build
@@ -62,7 +62,7 @@ $ make su3_rhmd_hisq 2>&1 | tee make_logfile.log
 Should you need to correct any compilation or build errors, **remember to clean build** and remove any previously built object files, before attempting to recompile:
 
 ```bash
-$ make clean
+make clean
 rm ../libraries/*o*
 ```
 
@@ -77,10 +77,10 @@ The benchmark files can be obtained from the NERSC repository. Note that this fi
 From the NERSC repo you'll be making use of the *medium benchmark lattice files* as follows:
 
 ```bash
-$ wget https://portal.nersc.gov/project/m888/apex/MILC_160413.tgz
-$ tar xvzf MILC_160413.tgz
-$ cd MILC-apex/benchmarks/medium
-$ wget https://portal.nersc.gov/project/m888/apex/MILC_lattices/36x36x36x72.chklat
+wget https://portal.nersc.gov/project/m888/apex/MILC_160413.tgz
+tar xvzf MILC_160413.tgz
+cd MILC-apex/benchmarks/medium
+wget https://portal.nersc.gov/project/m888/apex/MILC_lattices/36x36x36x72.chklat
 ```
 
 ## Running the Benchmark
