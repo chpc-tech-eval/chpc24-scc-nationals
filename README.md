@@ -34,14 +34,14 @@ Good Luck!
 
 | Application             | Deadline  | Weight | Breakdown                                                                                               |
 |-------------------------|-----------|--------|---------------------------------------------------------------------------------------------------------|
-| HPCC & HPCG             | Sun 18:00 | 20%    | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul> |
-| MILC                    | Mon 18:00 | 10%    |                                                                                                         |
-| MATLAB Coding Challenge | Mon 18:00 | 10%    |                                                                                                         |
-| LAMMPS                  | Tue 18:00 | 10%    |                                                                                                         |
-| NWChem                  | Tue 18:00 | 10%    |                                                                                                         |
-| PennyLane               | Tue 18:00 | 10%    |                                                                                                         |
-| RegCM                   | Wed 12:00 | 10%    |                                                                                                         |
-| Fan Favorite            | Wed 12:00 | 5%     |                                                                                                         |
+| HPCC & HPCG             | Sun 18:45 | 20%    | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul> |
+| MILC                    | Mon 17:45 | 10%    |                                                                                                         |
+| MATLAB Coding Challenge | Mon 17:45 | 10%    |                                                                                                         |
+| LAMMPS                  | Tue 17:45 | 10%    |                                                                                                         |
+| NWChem                  | Tue 17:45 | 10%    |                                                                                                         |
+| PennyLane               | Tue 17:45 | 10%    |                                                                                                         |
+| RegCM                   | Wed 11:45 | 10%    |                                                                                                         |
+| Fan Favorite            | Wed 11:45 | 5%     |                                                                                                         |
 | Presentation            | On-going  | 15%    | <ul><li>Judges' Scores *[5%]*<li>Cluster Configurations *[5%]*<li>Poster *[5%]*</li></UL>               |
 
 # Instructions for Mentors
