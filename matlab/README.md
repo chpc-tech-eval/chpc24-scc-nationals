@@ -361,6 +361,13 @@ function monteCarloPi_parallel( N, M, numChunks )
   % Configure Parallel Computing environment
   % parpool can take on values of `local`, `Threads`, `Processes`
   % Experiment with these to determine the best results
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  % Optimize the Code below
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
   mpiSettings = parcluster('local');
   mpiSettings.NumWorkers = M;
   saveProfile(mpiSettings);
@@ -377,7 +384,7 @@ function monteCarloPi_parallel( N, M, numChunks )
 
   timeTaken = toc;
   fprintf("Estimate for pi is %.8f after %f seconds using %f Bytes\n",piEst, timeTaken)
-  fprintf("Absolute error is %8.3e\n",abs(piEst2-pi))
+  fprintf("Absolute error is %8.3e\n",abs(piEst-pi))
   fprintf("%.2f million samples per second\n", N/timeTaken/1e6)
 
   delete(pool);
@@ -389,16 +396,19 @@ end
 
 You must use the `monteCarloPi_parallel` MATLAB script above as a starting point to accurately calculating $\pi$ over your cluster. Clearly document and describe the changes that you have implemented. Run the script on your most powerful node, and draw a table where you indicate how the number of samples changes with a change in the 'Maximum Number of Workers' and the 'Number of Chunks'.
 
-After completing the above experiments, you may attempt to run the benchmark across multiple nodes using MPI.
+After completing the above experiments, you may attempt to optimize and run the benchmark across multiple nodes using MPI.
 
 ```bash
 mpirun -np <N> --hostfile <PATH_TO_HOSTFILE> run_monteCarloPi_parallel.sh <PATH_TO_MATLAB_INSTALLATION>
 ```
 
-Submit your final script, your compiled binaries and your results. See if you can run the experiment for $10^12$ samples on your cluster.
+Submit your final script, your compiled binaries and your results. See if you can run the experiment for $10^12$ samples on your cluster. You will be scored on the:
+* accuracy of your estimation of %\pi%,
+* maximum number of samples you've managed to complete the experiment with *(higher is better),* and
+* rate of calculating samples.
 
 > [!TIP]
-> If you have time available, consider exploring and replacing the Parallel For-Loop with [SPMD](https://www.mathworks.com/help/parallel-computing/spmd.html?searchHighlight=spmd&s_tid=srchtitle_support_results_1_spmd).
+> If you are interested in improving your results even further, consider exploring and replacing the Parallel For-Loop with [SPMD](https://www.mathworks.com/help/parallel-computing/spmd.html?searchHighlight=spmd&s_tid=srchtitle_support_results_1_spmd) statements.
 >
 > You can also explore running the [HPC Challenge](https://www.mathworks.com/help/parallel-computing/benchmark-your-cluster-with-the-hpc-challenge.html) directly from within MATLAB.
 
