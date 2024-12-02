@@ -37,7 +37,7 @@ Good Luck!
 | HPCC & HPCG   |    20% | <ul><li>HPCC *[7.5%]*<ul><li>High Performance Linpack (HPL) *[5%]*</li></ul><li>HPCG *[7.5%]*</li></ul>                                    |
 |   MILC   |   10%  |  |
 |   MATLAB Coding Challenge   | 10%    |  |
-|   LAMMPS  | 10%     |  |
+|   LAMMPS  | 10%     |  <ul><li> Polymer Chain Melt *[4%]*<li> Larger Polymer System *[4%]*<li>Visualization *[2%]*</li></UL>                       |
 |   NWChem   |  10%   |  |
 |   PennyLane |  10%   |  |
 |   RegCM   |   10%  |  |
