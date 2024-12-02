@@ -92,9 +92,9 @@ Collect run times and analyze results across different core counts.
 
 | MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
 |             --- |            --- |          --- | ---                | ---      |
-|               4 |              1 |            8 | ???                | ???      |
-|               8 |              2 |            4 | ???                | ???      |
-|              16 |              4 |            2 | ???                | ???      |
+|               2 |              1 |          8   | ???                | ???      |
+|                 |                |              | ???                | ???      |
+|                 |                |              | ???                | ???      |
 |          etc... |            ... |          ... | ...                | ...      |
 
 
@@ -118,9 +118,9 @@ Collect run times and analyze results across different core counts.
 
 | MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
 |             --- |            --- |          --- | ---                | ---      |
-|               4 |              1 |            8 | ???                | ???      |
-|               8 |              2 |            4 | ???                | ???      |
-|              16 |              4 |            2 | ???                | ???      |
+|               2 |              1 |            8 | ???                | ???      |
+|                 |                |              | ???                | ???      |
+|                 |                |              | ???                | ???      |
 |          etc... |            ... |          ... | ...                | ...      |
 
 
@@ -132,33 +132,8 @@ Add this line to the LAMMPS input file to generate a dump file in LAMMPS
 ```bash
 dump 1 all atom 100 dump.lammps
 ```
-Install the OVITO PYTHON API
-```bash
-pip install ovito
-```
-Create a python script to load the data into OVITO's pipeline
-```bash
-import ovito
-from ovito.io import import_file
-from ovito.vis import Viewport
 
-# Load the LAMMPS data file
-pipeline = import_file("dump.lammps")
-
-# Set up the viewport for visualization
-viewport = Viewport()
-viewport.type = Viewport.Type.Perspective
-viewport.zoom_all()
-
-# Render and save as HTML file
-viewport.render_image(file_name="output_visualization.html", width=800, height=600)
-```
-Run python script
-
-```bash
-python script_name.py
-```
-SSH copy the output html file to local machine
+SSH copy the output file to the destination where it will be visualized 
 
 ```bash
 scp <username>@<remote_host>:<path_to_remote_file> <path_to_local_destination>
