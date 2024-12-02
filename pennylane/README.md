@@ -90,9 +90,7 @@ The [Variational Quantum Eigensolver](https://www.youtube.com/watch?v=YtepXvx5zd
 
 You do not need to worry about the details of the implementation, but the VQE Algorithm takes (i) a molecular Hamiltonian and a parametrized circuit preparing the quantum state of the molecule as inputs. The **Cost Function** is then defined as the expectation value of the Hamiltonian in the initial trial state. Performing an iterative minimization of this cost function is the how we obtained the desired ground state, using a classical optimizer which leverages a quantum computer to calculate the gradient of the cost function at each optimization step.
 
-The following Python script calculates the total en
-
-and save the following as a `lightning_qubit.py`
+The following Python script `lightning_qubit.py` calculates the total ground state energy of a water molecule.
 
 ```python
 import pennylane as qml
@@ -295,9 +293,11 @@ You will now build, compile and install the OpenMP device backend for PennyLane-
 > You may try to make use of the following *Kernel Performance Tuning* parameters for an improved result:
 >
 > **Build Options**
+>
 > `-DLQ_ENABLE_KERNEL_OMP=ON -DLQ_ENABLE_KERNEL_AVX_STREAMING=ON"`
 >
 > **Environment settings**
+>
 > `os.environ["OMP_PROC_BIND"] = "spread"`
 > `os.environ["OMP_PLACES"] = "threads"`
 
