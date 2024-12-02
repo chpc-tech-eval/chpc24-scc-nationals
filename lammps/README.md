@@ -80,21 +80,17 @@ Run the benchmark in parallel mode:
 ```bash
 mpirun -np <CORES> ../build/lmp -in in.chain > parallel-output-<CORES>.out
 ```
-
-# Benchmark 1: Parallel Efficiency Investigation
 Repeat the benchmark in parallel mode with different configurations to study performance scaling:
 
 ```bash
 mpirun -np <CORES> ../build/lmp -in in.chain > parallel-output-<CORES>.out
 ```
 
-Collect run times and analyze results across different core counts.
+Collect run times and analyze results across different core counts, should have no less than 5 set of results.
 
 | MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
 |             --- |            --- |          --- | ---                | ---      |
 |               2 |              1 |          8   | ???                | ???      |
-|                 |                |              | ???                | ???      |
-|                 |                |              | ???                | ???      |
 |          etc... |            ... |          ... | ...                | ...      |
 
 
@@ -114,14 +110,13 @@ Run the domain decomposition:
 $ mpirun -np <MPI PARAMETERS> ./lmp -var x 8 -var y 8 -var z 8 -in in.chain.scaled > large-output.out
 ```
 
-Collect run times and analyze results across different core counts.
+Collect run times and analyze results across different core counts, should have no less than 5 set of results.
 
 | MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
 |             --- |            --- |          --- | ---                | ---      |
-|               2 |              1 |            8 | ???                | ???      |
-|                 |                |              | ???                | ???      |
-|                 |                |              | ???                | ???      |
+|               2 |              1 |          8   | ???                | ???      |
 |          etc... |            ... |          ... | ...                | ...      |
+
 
 
 # Visualization
@@ -139,13 +134,6 @@ SSH copy the output file to the destination where it will be visualized
 scp <username>@<remote_host>:<path_to_remote_file> <path_to_local_destination>
 ```
 
-## Submission
+# Submission
 
-Benchmark 1 
--parallel-output-<CORES>.out
--parallel investigation table
--output.html file from visualization
--Readme 
--executable binary
-
-Benchmark 2
+Submit your `parallel-output.out` for your best result, the table with the results from the performance scaling,  an executable binary and from the visualisation, a screenshot of the visualization for both benchmark 1 and 2.
