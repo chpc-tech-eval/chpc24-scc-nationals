@@ -40,7 +40,7 @@ git checkout stable_29Aug2024_update1
 ```
 
 ## Building and Deploying LAMMPS
-After downloading, navigate to the source directory and compile with desired options:
+After downloading, navigate to the source directory and compile with desired options (e.g):
 
 ```bash
 cd stable_29Aug2024_update1
@@ -72,7 +72,7 @@ pair_style  lj/cut 2.5
 Set the number of OMP threads
 
 ```bash
-export OMP_NUM_THREADS=1
+export OMP_NUM_THREADS= <num_threads>
 ```
 
 Run the benchmark in parallel mode:
@@ -101,11 +101,65 @@ Collect run times and analyze results across different core counts.
 
 Use tools like [OVITO](https://www.ovito.org/) for visualizing the polymer dynamics from the output files. 
 
+Add this line to the LAMMPS input file to generate a dump file in LAMMPS
+```bash
+dump 1 all atom 100 dump.lammps
+```
+Install the OVITO PYTHON API
+```bash
+pip install ovito
+```
+Create a python script to load the data into OVITO's pipeline
+```bash
+import ovito
+from ovito.io import import_file
+from ovito.vis import Viewport
+
+# Load the LAMMPS data file
+pipeline = import_file("dump.lammps")
+
+# Set up the viewport for visualization
+viewport = Viewport()
+viewport.type = Viewport.Type.Perspective
+viewport.zoom_all()
+
+# Render and save as HTML file
+viewport.render_image(file_name="output_visualization.html", width=800, height=600)
+```
+Run python script
+
+```bash
+python script_name.py
+```
+```
+SSH copy the output html file to local machine
+
+```bash
+scp <username>@<remote_host>:<path_to_remote_file> <path_to_local_destination>
+```
+
+
 # Benchmark 2: Larger Polymer System
 Repeat the setup with a larger polymer chain to benchmark LAMMPS in a higher-load scenario.
 
-Run the domain decomposition:
-```bash
-$ mpirun -np <MPI PARAMETERS> ./lmp -in in.large_polymer_chain_melt > large-output.out
+Edit and configure the input simulation file (in.chain.scaled) :
+
+```config
+units       lj
+atom_style  molecular
+pair_style  lj/cut 2.5
 ```
 
+Run the domain decomposition:
+```bash
+$ mpirun -np <MPI PARAMETERS> ./lmp -var x 8 -var y 8 -var z 8 -in in.chain.scaled > large-output.out
+```
+
+Collect run times and analyze results across different core counts.
+
+| MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
+|             --- |            --- |          --- | ---                | ---      |
+|               4 |              1 |            8 | ???                | ???      |
+|               8 |              2 |            4 | ???                | ???      |
+|              16 |              4 |            2 | ???                | ???      |
+|          etc... |            ... |          ... | ...                | ...      |
