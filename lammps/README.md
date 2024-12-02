@@ -97,7 +97,34 @@ Collect run times and analyze results across different core counts.
 |              16 |              4 |            2 | ???                | ???      |
 |          etc... |            ... |          ... | ...                | ...      |
 
-# Benchmark 1: Visualization
+
+# Benchmark 2: Larger Polymer System
+Repeat the setup with a larger polymer chain to benchmark LAMMPS in a higher-load scenario.
+
+Edit and configure the input simulation file (in.chain.scaled) :
+
+```config
+units       lj
+atom_style  molecular
+pair_style  lj/cut 2.5
+```
+
+Run the domain decomposition:
+```bash
+$ mpirun -np <MPI PARAMETERS> ./lmp -var x 8 -var y 8 -var z 8 -in in.chain.scaled > large-output.out
+```
+
+Collect run times and analyze results across different core counts.
+
+| MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
+|             --- |            --- |          --- | ---                | ---      |
+|               4 |              1 |            8 | ???                | ???      |
+|               8 |              2 |            4 | ???                | ???      |
+|              16 |              4 |            2 | ???                | ???      |
+|          etc... |            ... |          ... | ...                | ...      |
+
+
+# Visualization
 
 Use tools like [OVITO](https://www.ovito.org/) for visualizing the polymer dynamics from the output files. 
 
@@ -131,35 +158,19 @@ Run python script
 ```bash
 python script_name.py
 ```
-```
 SSH copy the output html file to local machine
 
 ```bash
 scp <username>@<remote_host>:<path_to_remote_file> <path_to_local_destination>
 ```
 
+## Submission
 
-# Benchmark 2: Larger Polymer System
-Repeat the setup with a larger polymer chain to benchmark LAMMPS in a higher-load scenario.
+Benchmark 1 
+-parallel-output-<CORES>.out
+-parallel investigation table
+-output.html file from visualization
+-Readme 
+-executable binary
 
-Edit and configure the input simulation file (in.chain.scaled) :
-
-```config
-units       lj
-atom_style  molecular
-pair_style  lj/cut 2.5
-```
-
-Run the domain decomposition:
-```bash
-$ mpirun -np <MPI PARAMETERS> ./lmp -var x 8 -var y 8 -var z 8 -in in.chain.scaled > large-output.out
-```
-
-Collect run times and analyze results across different core counts.
-
-| MPI Ranks | Ranks Per Node | Threads/Rank | RAM Usage Per Node | Run Time |
-|             --- |            --- |          --- | ---                | ---      |
-|               4 |              1 |            8 | ???                | ???      |
-|               8 |              2 |            4 | ???                | ???      |
-|              16 |              4 |            2 | ???                | ???      |
-|          etc... |            ... |          ... | ...                | ...      |
+Benchmark 2
