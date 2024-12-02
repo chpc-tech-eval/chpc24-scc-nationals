@@ -37,7 +37,7 @@ Team Captains have been provided with the URL, Activation Key and Licensing info
    * APT
      ```bash
      # Debian, Ubuntu
-     sudo apt install alsa-lib cairo cairo-gobject cups-libs gdk-pixbuf2 glib2 glibc glibc-langpack-en glibc-locale-source gtk3 libICE libXcomposite libXcursor libXdamage libXfixes libXft libXinerama libXrandr libXt libXtst libXxf86vm libcap libdrm libglvnd-glx libsndfile libtool-ltdl libuuid libwayland-client make mesa-libgbm net-tools nspr nss nss-util pam pango procps-ng sudo unzip which zlib
+     sudo apt install libasound2t64 libcairo2 libcairo-gobject2 libcups2 libgdk-pixbuf-2.0-0 libglib2.0-0 libc6 language-pack-en locales libgtk-3-0 libice6 libxcomposite1 libxcursor1 libxdamage1 libxfixes3 libxft2 libxinerama1 libxrandr2 libxt6 libxtst6 libxxf86vm1 libcap2 libdrm2 libgl1 libsndfile1 libltdl7 libuuid1 libwayland-client0 libgbm1 net-tools libnspr4 libnss3 libpam0g libpango-1.0-0 procps sudo unzip which zlib1g
      ```
    * Pacman
      ```bash
